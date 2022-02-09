@@ -11,6 +11,7 @@ struct ContentView: View {
     @ObservedObject var recognizedContent = RecognizedContent()
     @State private var showScanner = false
     @State private var isRecognizing = false
+    @State private var ingredient: String = ""
     
     var body: some View {
         NavigationView {
@@ -33,10 +34,15 @@ struct ContentView: View {
                         .padding(10)
 
                 }
-                Text("Plz Work")
-                    .onAppear {
-                        API().getResults()
-                    }
+//                Text("Plz Work")
+//                    .onAppear {
+//                        API().getResults()
+//                    }
+                TextField("Enter Ingredient", text: $ingredient,
+                          onCommit: {
+                    API().getResults(ingredients: ingredient)
+                }
+                ).padding()
                 
                 if isRecognizing {
                     ProgressView()

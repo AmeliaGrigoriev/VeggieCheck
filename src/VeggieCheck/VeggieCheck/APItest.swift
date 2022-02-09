@@ -12,8 +12,10 @@ struct Checker: Codable {
 }
 
 class API {
-    func getResults() {
-        guard let url = URL(string: "https://is-vegan.netlify.com/.netlify/functions/api?ingredients=adrenaline,albumen") else {
+    func getResults(ingredients: String) {
+        let fullURL = "https://is-vegan.netlify.com/.netlify/functions/api?ingredients=" + ingredients
+        print(fullURL)
+        guard let url = URL(string: fullURL) else {
             print("ingredients not entered correctly"); return
         }
         
