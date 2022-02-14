@@ -34,10 +34,7 @@ struct ContentView: View {
                         .padding(10)
 
                 }
-//                Text("Plz Work")
-//                    .onAppear {
-//                        API().getResults()
-//                    }
+
                 TextField("Enter Ingredient", text: $ingredient,
                           onCommit: {
                     API().getResults(ingredients: ingredient)
@@ -52,23 +49,23 @@ struct ContentView: View {
                 
             }
             .navigationTitle("Veggie Check")
-            .navigationBarItems(trailing: Button(action: {
-                guard !isRecognizing else { return }
-                showScanner = true
-            }, label: {
-                HStack {
-                    Image(systemName: "doc.text.viewfinder")
-                        .renderingMode(.template)
-                        .foregroundColor(.white)
-
-                    Text("Scan")
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 36)
-                .background(Color(UIColor.systemIndigo))
-                .cornerRadius(18)
-            }))
+//            .navigationBarItems(trailing: Button(action: {
+//                guard !isRecognizing else { return }
+//                showScanner = true
+//            }, label: {
+//                HStack {
+//                    Image(systemName: "doc.text.viewfinder")
+//                        .renderingMode(.template)
+//                        .foregroundColor(.white)
+//
+//                    Text("Scan")
+//                        .foregroundColor(.white)
+//                }
+//                .padding(.horizontal, 16)
+//                .frame(height: 36)
+//                .background(Color(UIColor.systemIndigo))
+//                .cornerRadius(18)
+//            }))
             
         }
         .sheet(isPresented: $showScanner, content: {
