@@ -12,6 +12,8 @@ struct ContentView: View {
     @State private var showScanner = false
     @State private var isRecognizing = false
     @State private var ingredient: String = ""
+    @State private var showingVeganAlert = false
+    @State private var showingNonVeganAlert = false
     
     var body: some View {
         NavigationView {
@@ -37,7 +39,15 @@ struct ContentView: View {
 
                 TextField("Enter Ingredient", text: $ingredient,
                           onCommit: {
-                    API().getResults(ingredients: ingredient)
+                    API().getResults(ingredients: ingredient) { Checker in
+                        if Checker.isVeganSafe {
+//                            print("vegan safe")
+                            showingVeganAlert = true
+                        }
+                        else {
+                            showingNonVeganAlert = true
+                        }
+                    }
                 }
                 ).padding()
                 
@@ -48,6 +58,12 @@ struct ContentView: View {
                 }
                 
             }
+            .alert("Ingredient entered is vegan friendly", isPresented: $showingVeganAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
+            .alert("Ingredient entered is not vegan friendly", isPresented: $showingNonVeganAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
             .navigationTitle("Veggie Check")
 //            .navigationBarItems(trailing: Button(action: {
 //                guard !isRecognizing else { return }
