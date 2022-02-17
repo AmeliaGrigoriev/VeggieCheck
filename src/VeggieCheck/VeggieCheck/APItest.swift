@@ -12,7 +12,7 @@ struct Checker: Codable {
 }
 
 class API {
-    func getResults(ingredients: String) {
+    func getResults(ingredients: String, completion: @escaping (Checker) -> ()) {
         let fullURL = "https://is-vegan.netlify.com/.netlify/functions/api?ingredients=" + ingredients
         print(fullURL)
         guard let url = URL(string: fullURL) else {
@@ -21,9 +21,11 @@ class API {
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             let results = try! JSONDecoder().decode(Checker.self, from: data!)
-            print(results)
+//            print(results)
+            DispatchQueue.main.async {
+                completion(results)
+            }
         }.resume()
     }
 }
 
-// completion: @escaping (Result<[Checker],Error>) -> Void

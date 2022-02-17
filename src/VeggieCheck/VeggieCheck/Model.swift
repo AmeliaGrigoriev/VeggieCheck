@@ -10,6 +10,7 @@ import Foundation
 class TextItem: Identifiable {
     var id: String
     var text: String = ""
+    var vegan: Bool = false
     
     init() {
         id = UUID().uuidString

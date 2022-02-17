@@ -29,7 +29,13 @@ struct TextRecognition {
                     DispatchQueue.main.async {
                         recognizedContent.items.append(textItem)
                         print(createString(ingredients: textItem.text))
-                        API().getResults(ingredients: createString(ingredients: textItem.text))
+                        API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
+                            if Checker.isVeganSafe {
+                                print("vegan safe")
+//                                showingAlert = true
+                                textItem.vegan = true
+                            }
+                        }
                     }
                 } catch {
                     print(error.localizedDescription)

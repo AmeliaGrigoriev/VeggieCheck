@@ -41,7 +41,7 @@ struct ContentView: View {
                           onCommit: {
                     API().getResults(ingredients: ingredient) { Checker in
                         if Checker.isVeganSafe {
-//                            print("vegan safe")
+                            print("vegan safe")
                             showingVeganAlert = true
                         }
                         else {
@@ -58,11 +58,11 @@ struct ContentView: View {
                 }
                 
             }
-            .alert("Ingredient entered is vegan friendly", isPresented: $showingVeganAlert) {
-                        Button("OK", role: .cancel) { }
+            .alert(isPresented: $showingVeganAlert) { // NOT WORKING
+                        Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is vegan friendly"), dismissButton: .default(Text("Got it!")))
                     }
-            .alert("Ingredient entered is not vegan friendly", isPresented: $showingNonVeganAlert) {
-                        Button("OK", role: .cancel) { }
+            .alert(isPresented: $showingNonVeganAlert) {
+                        Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is not vegan friendly"), dismissButton: .default(Text("Got it!")))
                     }
             .navigationTitle("Veggie Check")
 //            .navigationBarItems(trailing: Button(action: {
