@@ -7,17 +7,21 @@
 
 import SwiftUI
 
+enum VeganAlert {
+    case vegan, nonvegan
+}
+
 struct ContentView: View {
     @ObservedObject var recognizedContent = RecognizedContent()
     @State private var showScanner = false
     @State private var isRecognizing = false
     @State private var ingredient: String = ""
-    @State private var showingVeganAlert = false
-    @State private var showingNonVeganAlert = false
+    @State private var veganAlert: VeganAlert = .vegan
+    @State private var showAlert = false
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
+            VStack() {
                 List(recognizedContent.items, id: \.id) { textItem in
                     NavigationLink(destination: TextPreviewView(text: textItem.text)) {
                         Text(String(textItem.text.prefix(50)).appending("..."))
@@ -37,18 +41,20 @@ struct ContentView: View {
 
                 }
 
-                TextField("Enter Ingredient", text: $ingredient,
-                          onCommit: {
+                TextField("Enter Ingredient", text: $ingredient, onCommit: {
                     API().getResults(ingredients: ingredient) { Checker in
                         if Checker.isVeganSafe {
+                            veganAlert = .vegan
                             print("vegan safe")
-                            showingVeganAlert = true
                         }
                         else {
-                            showingNonVeganAlert = true
+                            veganAlert = .nonvegan
+                            print("not vagan safe")
                         }
+                        showAlert = true
                     }
                 }
+                          
                 ).padding()
                 
                 if isRecognizing {
@@ -58,30 +64,17 @@ struct ContentView: View {
                 }
                 
             }
-            .alert(isPresented: $showingVeganAlert) { // NOT WORKING
-                        Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is vegan friendly"), dismissButton: .default(Text("Got it!")))
+            
+            .alert(isPresented: $showAlert) {
+                        switch veganAlert {
+                        case .vegan:
+                            return Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is vegan friendly"), dismissButton: .default(Text("Got it!")))
+                        case .nonvegan:
+                            return Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is not vegan friendly"), dismissButton: .default(Text("Got it!")))
+                        }
                     }
-            .alert(isPresented: $showingNonVeganAlert) {
-                        Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is not vegan friendly"), dismissButton: .default(Text("Got it!")))
-                    }
+            
             .navigationTitle("Veggie Check")
-//            .navigationBarItems(trailing: Button(action: {
-//                guard !isRecognizing else { return }
-//                showScanner = true
-//            }, label: {
-//                HStack {
-//                    Image(systemName: "doc.text.viewfinder")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.white)
-//
-//                    Text("Scan")
-//                        .foregroundColor(.white)
-//                }
-//                .padding(.horizontal, 16)
-//                .frame(height: 36)
-//                .background(Color(UIColor.systemIndigo))
-//                .cornerRadius(18)
-//            }))
             
         }
         .sheet(isPresented: $showScanner, content: {
