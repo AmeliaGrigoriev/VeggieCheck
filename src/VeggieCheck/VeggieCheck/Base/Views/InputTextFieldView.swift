@@ -1,8 +1,8 @@
 //
-//  TextInputFieldView.swift
-//  VeggieCheck
+//  InputTextFieldView.swift
+//  VeggieCheckTesting
 //
-//  Created by Amelia Grigoriev on 24/02/2022.
+//  Created by Amelia Grigoriev on 20/02/2022.
 //
 
 import SwiftUI
@@ -44,22 +44,19 @@ struct InputTextFieldView: View {
 
 struct InputTextFieldView_Previews: PreviewProvider {
     static var previews: some View {
+        
         Group {
             InputTextFieldView(text: .constant(""),
                                placeholder: "Email",
                                keyboardType: .emailAddress,
                                sfSymbol: "envelope")
-                .previewLayout(.sizeThatFits)
-                .previewDisplayName("Email text input with sfsymbol")
-                .padding()
+                .preview(with: "Email Text Input with sfSymbol")
             
             InputTextFieldView(text: .constant(""),
                                placeholder: "First Name",
                                keyboardType: .default,
                                sfSymbol: nil)
-                .previewLayout(.sizeThatFits)
-                .previewDisplayName("First name text input with sfsymbol")
-                .padding()
+                .preview(with: "First Name Text Input without sfSymbol")
         }
     }
 }

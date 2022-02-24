@@ -12,6 +12,7 @@
 		28C0092227C7B43200664C67 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C0092127C7B43200664C67 /* GoogleService-Info.plist */; };
 		28C0092727C7B7CC00664C67 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0092627C7B7CC00664C67 /* LoginView.swift */; };
 		28C0092B27C7B8E000664C67 /* InputTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0092A27C7B8E000664C67 /* InputTextFieldView.swift */; };
+		28C0092E27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0092D27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift */; };
 		28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */; };
 		28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E6B279F2B2B00D90FBE /* ContentView.swift */; };
 		28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E6D279F2B3600D90FBE /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		28C0092127C7B43200664C67 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28C0092627C7B7CC00664C67 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		28C0092A27C7B8E000664C67 /* InputTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextFieldView.swift; sourceTree = "<group>"; };
+		28C0092D27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLayoutComponentModifier.swift; sourceTree = "<group>"; };
 		28C95E66279F2B2B00D90FBE /* VeggieCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeggieCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeggieCheckApp.swift; sourceTree = "<group>"; };
 		28C95E6B279F2B2B00D90FBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		28C0092827C7B89A00664C67 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				28C0092C27C7BB9900664C67 /* Modifier */,
 				28C0092927C7B8B400664C67 /* Views */,
 			);
 			path = Base;
@@ -91,6 +94,14 @@
 				28C0092A27C7B8E000664C67 /* InputTextFieldView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		28C0092C27C7BB9900664C67 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				28C0092D27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift */,
+			);
+			path = Modifier;
 			sourceTree = "<group>";
 		};
 		28C95E5D279F2B2B00D90FBE = {
@@ -221,6 +232,7 @@
 				E584055327B0964D0043F68B /* ScannerView.swift in Sources */,
 				28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */,
 				E584055727B096C20043F68B /* TextRecognition.swift in Sources */,
+				28C0092E27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift in Sources */,
 				28C0092727C7B7CC00664C67 /* LoginView.swift in Sources */,
 				28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */,
 			);
