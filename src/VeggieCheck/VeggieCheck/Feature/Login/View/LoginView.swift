@@ -1,6 +1,6 @@
 //
 //  LoginView.swift
-//  VeggieCheck
+//  VeggieCheckTesting
 //
 //  Created by Amelia Grigoriev on 20/02/2022.
 //
@@ -11,6 +11,10 @@ struct LoginView: View {
     
     @State private var showRegistration = false
     @State private var showForgotPassword = false
+        
+    @StateObject private var vm = LoginViewModelImpl(
+        service: LoginServiceImpl()
+    )
     
     var body: some View {
             
@@ -18,12 +22,12 @@ struct LoginView: View {
                 
                 VStack(spacing: 16) {
                     
-                    InputTextFieldView(text: .constant(""),
+                    InputTextFieldView(text: $vm.credentials.email,
                                        placeholder: "Email",
                                        keyboardType: .emailAddress,
                                        sfSymbol: "envelope")
                     
-                    InputPasswordView(password: .constant(""),
+                    InputPasswordView(password: $vm.credentials.password,
                                       placeholder: "Password",
                                       sfSymbol: "lock")
                 }
@@ -45,7 +49,7 @@ struct LoginView: View {
                 VStack(spacing: 16) {
                     
                     ButtonView(title: "Login") {
-                        // TODO: Handle login action here
+                        vm.login()
                     }
                     
                     ButtonView(title: "Register",
@@ -61,12 +65,25 @@ struct LoginView: View {
             }
             .padding(.horizontal, 15)
             .navigationTitle("Login")
+            .alert(isPresented: $vm.hasError, content: {
+                
+                if case .failed(let error) = vm.state {
+                    return Alert(
+                        title: Text("Error"),
+                        message: Text(error.localizedDescription))
+                } else {
+                    return Alert(
+                        title: Text("Error"),
+                        message: Text("Something went wrong"))
+                }
+            })
     }
 }
 
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        NavigationView {
+            LoginView()
+        }
     }
 }
