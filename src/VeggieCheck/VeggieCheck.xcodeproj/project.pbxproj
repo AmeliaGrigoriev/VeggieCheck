@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28C0091E27C7B2D700664C67 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 28C0091D27C7B2D700664C67 /* FirebaseAuth */; };
+		28C0092027C7B2D700664C67 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 28C0091F27C7B2D700664C67 /* FirebaseDatabase */; };
+		28C0092227C7B43200664C67 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C0092127C7B43200664C67 /* GoogleService-Info.plist */; };
 		28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */; };
 		28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E6B279F2B2B00D90FBE /* ContentView.swift */; };
 		28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E6D279F2B3600D90FBE /* Assets.xcassets */; };
@@ -19,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28C0092127C7B43200664C67 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28C95E66279F2B2B00D90FBE /* VeggieCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeggieCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeggieCheckApp.swift; sourceTree = "<group>"; };
 		28C95E6B279F2B2B00D90FBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C0092027C7B2D700664C67 /* FirebaseDatabase in Frameworks */,
+				28C0091E27C7B2D700664C67 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +68,7 @@
 		28C95E68279F2B2B00D90FBE /* VeggieCheck */ = {
 			isa = PBXGroup;
 			children = (
+				28C0092127C7B43200664C67 /* GoogleService-Info.plist */,
 				28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */,
 				28C95E6B279F2B2B00D90FBE /* ContentView.swift */,
 				28C95E6D279F2B3600D90FBE /* Assets.xcassets */,
@@ -100,6 +107,10 @@
 			dependencies = (
 			);
 			name = VeggieCheck;
+			packageProductDependencies = (
+				28C0091D27C7B2D700664C67 /* FirebaseAuth */,
+				28C0091F27C7B2D700664C67 /* FirebaseDatabase */,
+			);
 			productName = VeggieCheck;
 			productReference = 28C95E66279F2B2B00D90FBE /* VeggieCheck.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +138,9 @@
 				Base,
 			);
 			mainGroup = 28C95E5D279F2B2B00D90FBE;
+			packageReferences = (
+				28C0091C27C7B2D700664C67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 28C95E67279F2B2B00D90FBE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +157,7 @@
 			files = (
 				28C95E71279F2B3600D90FBE /* Preview Assets.xcassets in Resources */,
 				28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */,
+				28C0092227C7B43200664C67 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +312,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ameliagrigoriev.VeggieCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -319,6 +335,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ameliagrigoriev.VeggieCheck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -348,6 +365,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		28C0091C27C7B2D700664C67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		28C0091D27C7B2D700664C67 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28C0091C27C7B2D700664C67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		28C0091F27C7B2D700664C67 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 28C0091C27C7B2D700664C67 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 28C95E5E279F2B2B00D90FBE /* Project object */;
 }
