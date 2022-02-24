@@ -2,7 +2,7 @@
 //  PreviewLayoutComponentModifier.swift
 //  VeggieCheck
 //
-//  Created by Amelia Grigoriev on 24/02/2022.
+//  Created by Amelia Grigoriev on 20/02/2022.
 //
 
 import SwiftUI
