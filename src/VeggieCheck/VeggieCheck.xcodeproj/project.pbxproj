@@ -21,6 +21,7 @@
 		28C0094027C7C2B800664C67 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0093F27C7C2B800664C67 /* ForgotPasswordView.swift */; };
 		28C0094327C7C4D800664C67 /* RegistrationDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0094227C7C4D800664C67 /* RegistrationDetails.swift */; };
 		28C0094727C7C50200664C67 /* RegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0094627C7C50200664C67 /* RegistrationService.swift */; };
+		28C0094A27C7C62E00664C67 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0094927C7C62E00664C67 /* RegistrationViewModel.swift */; };
 		28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */; };
 		28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E6B279F2B2B00D90FBE /* ContentView.swift */; };
 		28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E6D279F2B3600D90FBE /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		28C0093F27C7C2B800664C67 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		28C0094227C7C4D800664C67 /* RegistrationDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDetails.swift; sourceTree = "<group>"; };
 		28C0094627C7C50200664C67 /* RegistrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationService.swift; sourceTree = "<group>"; };
+		28C0094927C7C62E00664C67 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		28C95E66279F2B2B00D90FBE /* VeggieCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeggieCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeggieCheckApp.swift; sourceTree = "<group>"; };
 		28C95E6B279F2B2B00D90FBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		28C0093327C7C07100664C67 /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				28C0094827C7C61100664C67 /* ViewModel */,
 				28C0094427C7C4E700664C67 /* Service */,
 				28C0094127C7C4B100664C67 /* Model */,
 				28C0093427C7C08100664C67 /* View */,
@@ -190,6 +193,14 @@
 				28C0094627C7C50200664C67 /* RegistrationService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		28C0094827C7C61100664C67 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				28C0094927C7C62E00664C67 /* RegistrationViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		28C95E5D279F2B2B00D90FBE = {
@@ -316,6 +327,7 @@
 				28C0093027C7BC8E00664C67 /* InputPasswordView.swift in Sources */,
 				28C0093827C7C12700664C67 /* CloseModifier.swift in Sources */,
 				28C0094027C7C2B800664C67 /* ForgotPasswordView.swift in Sources */,
+				28C0094A27C7C62E00664C67 /* RegistrationViewModel.swift in Sources */,
 				E584055127B096070043F68B /* Model.swift in Sources */,
 				28C0094727C7C50200664C67 /* RegistrationService.swift in Sources */,
 				28C0093C27C7C22700664C67 /* HomeView.swift in Sources */,
