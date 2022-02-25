@@ -12,6 +12,8 @@ enum VeganAlert {
 }
 
 struct ContentView: View {
+//    @EnvironmentObject var sessionService: SessionServiceImpl
+    
     @ObservedObject var recognizedContent = RecognizedContent()
     @State private var showScanner = false
     @State private var isRecognizing = false
@@ -22,10 +24,20 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack() {
-                List(recognizedContent.items, id: \.id) { textItem in
-                    NavigationLink(destination: TextPreviewView(text: textItem.text)) {
-                        Text(String(textItem.text.prefix(50)).appending("..."))
-                    }
+//                List(recognizedContent.items, id: \.id) { textItem in
+//                    NavigationLink(destination: TextPreviewView(text: textItem.text)) {
+//                        Text(String(textItem.text.prefix(50)).appending("..."))
+//                    }
+//                }
+                HStack(spacing: 16) {
+                    
+//                    VStack(spacing: 10) {
+//                        Text("\(sessionService.userDetails?.firstName ?? "N/A") \(sessionService.userDetails?.lastName ?? "N/A")").font(.system(size: 22))
+//                    }
+//                                
+//                    ButtonView(title: "Logout") {
+//                        sessionService.logout()
+//                    }
                 }
                 Button(action: {
                     guard !isRecognizing else { return }
@@ -107,6 +119,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+//            .environmentObject(SessionServiceImpl())
     }
 }
 

@@ -21,9 +21,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 struct VeggieCheckApp: App {
     
     let persistenceController = PersistenceController.shared
-    
+//
     func addIngredients() -> [String] {
-        
+
         var myStrings: [String] = []
 
         if let path = Bundle.main.path(forResource: "nonveganlist", ofType: "txt") {
@@ -32,39 +32,39 @@ struct VeggieCheckApp: App {
                 let lowerIngredients = data.lowercased()
                 myStrings = lowerIngredients.components(separatedBy: .newlines)
 //                print(myStrings)
-                
+
             } catch {
                 print(error)
             }
         }
         return myStrings
     }
-    
-    func pListCreation() {
-        let fileManager = FileManager.default
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-        let documentsDirectory = paths.object(at: 0) as! NSString
-        let path = documentsDirectory.appendingPathComponent("NonVeganIngredients.plist")
-
-        if (!fileManager.fileExists(atPath: path)) {
-            let Array = addIngredients()
-            let plistContent = NSArray(array: Array)
-            let success:Bool = plistContent.write(toFile: path, atomically: true)
-            if success {
-                print("file has been created!")
-            }else{
-                print("unable to create the file")
-            }
-
-        }else{
-            print("file already exist")
-        }
-    }
-    
-    func hello() {
-        print("im working")
-    }
-    
+//
+//    func pListCreation() {
+//        let fileManager = FileManager.default
+//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
+//        let documentsDirectory = paths.object(at: 0) as! NSString
+//        let path = documentsDirectory.appendingPathComponent("NonVeganIngredients.plist")
+//
+//        if (!fileManager.fileExists(atPath: path)) {
+//            let Array = addIngredients()
+//            let plistContent = NSArray(array: Array)
+//            let success:Bool = plistContent.write(toFile: path, atomically: true)
+//            if success {
+//                print("file has been created!")
+//            }else{
+//                print("unable to create the file")
+//            }
+//
+//        }else{
+//            print("file already exist")
+//        }
+//    }
+//
+//    func hello() {
+//        print("im working")
+//    }
+//
     private func preLoadData() {
         let preloadedDataKey = "didPreloadData"
         print("1")
@@ -75,7 +75,7 @@ struct VeggieCheckApp: App {
             print("2")
             let backgroundContext = persistenceController.container.newBackgroundContext()
             persistenceController.container.viewContext.automaticallyMergesChangesFromParent = true
-            
+
             backgroundContext.perform {
 //
                 print("4")
@@ -96,14 +96,14 @@ struct VeggieCheckApp: App {
             }
         }
     }
-    
+//
     init() {
 //        pListCreation()
-        hello()
+//        hello()
         preLoadData()
     }
     
-    @Environment(\.scenePhase) var scenePhase
+//    @Environment(\.scenePhase) var scenePhase
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var sessionService = SessionServiceImpl()
@@ -115,11 +115,26 @@ struct VeggieCheckApp: App {
                     case .loggedIn:
                         HomeView()
                             .environmentObject(sessionService)
+//                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
                     case .loggedOut:
                         LoginView()
                     }
                 
             }
         }
+//        .onChange(of: scenePhase) { (newScenePhase) in
+//            switch newScenePhase {
+//
+//            case .background:
+//                print("Scene is in background")
+//                persistenceController.save()
+//            case .inactive:
+//                print("Scene is inactive")
+//            case .active:
+//                print("Scene is active")
+//            @unknown default:
+//                print("Something is different")
+//            }
+//        }
     }
 }

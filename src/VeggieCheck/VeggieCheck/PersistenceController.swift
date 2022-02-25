@@ -8,11 +8,11 @@
 import CoreData
 
 struct PersistenceController {
-    
+
     static let shared = PersistenceController()
-    
+
     let container: NSPersistentContainer
-    
+
     init() {
         container = NSPersistentContainer(name: "Ingredients")
         container.loadPersistentStores { (description, error) in
@@ -21,7 +21,7 @@ struct PersistenceController {
             }
         }
     }
-    
+
     func save(completion: @escaping (Error?) -> () = {_ in}) {
         let context = container.viewContext
         if context.hasChanges {
@@ -33,22 +33,22 @@ struct PersistenceController {
             }
         }
     }
-    
+
     func delete(_ object: NSManagedObject, completion: @escaping (Error?) -> () = {_ in}) {
         let context = container.viewContext
         context.delete(object)
-        
+
         save(completion: completion)
     }
-    
+
     func fetchIngredient(with ingredient: String) -> Bool {
 
         let fetchRequest: NSFetchRequest<Vegan>
         fetchRequest = Vegan.fetchRequest()
         var isVegan: Bool = true
-        
+
         fetchRequest.predicate = NSPredicate(format: "ingredient LIKE[cd] %@", ingredient)
-        
+
         do {
             if (try container.viewContext.fetch(fetchRequest).first != nil) {
                 isVegan = false
