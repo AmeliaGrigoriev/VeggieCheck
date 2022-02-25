@@ -36,6 +36,10 @@
 		E584055527B0968C0043F68B /* TextPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055427B0968C0043F68B /* TextPreviewView.swift */; };
 		E584055727B096C20043F68B /* TextRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055627B096C20043F68B /* TextRecognition.swift */; };
 		E584055927B097130043F68B /* APItest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055827B097130043F68B /* APItest.swift */; };
+		E599369527C8EF0F00092165 /* nonveganlist.txt in Resources */ = {isa = PBXBuildFile; fileRef = E599369427C8EF0F00092165 /* nonveganlist.txt */; };
+		E599369727C8EF3D00092165 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599369627C8EF3D00092165 /* PersistenceController.swift */; };
+		E599369A27C8EF7A00092165 /* Ingredients.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E599369827C8EF7A00092165 /* Ingredients.xcdatamodeld */; };
+		E599369C27C8EFEB00092165 /* CheckedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599369B27C8EFEB00092165 /* CheckedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		E584055427B0968C0043F68B /* TextPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewView.swift; sourceTree = "<group>"; };
 		E584055627B096C20043F68B /* TextRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognition.swift; sourceTree = "<group>"; };
 		E584055827B097130043F68B /* APItest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APItest.swift; sourceTree = "<group>"; };
+		E599369427C8EF0F00092165 /* nonveganlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nonveganlist.txt; sourceTree = "<group>"; };
+		E599369627C8EF3D00092165 /* PersistenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		E599369927C8EF7A00092165 /* Ingredients.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ingredients.xcdatamodel; sourceTree = "<group>"; };
+		E599369B27C8EFEB00092165 /* CheckedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,14 +298,18 @@
 				28C0092127C7B43200664C67 /* GoogleService-Info.plist */,
 				28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */,
 				28C95E6B279F2B2B00D90FBE /* ContentView.swift */,
+				E599369627C8EF3D00092165 /* PersistenceController.swift */,
 				28C95E6D279F2B3600D90FBE /* Assets.xcassets */,
 				28C95E72279F2B3600D90FBE /* Info.plist */,
 				28C95E6F279F2B3600D90FBE /* Preview Content */,
 				E584055027B096070043F68B /* Model.swift */,
 				E584055227B0964D0043F68B /* ScannerView.swift */,
+				E599369B27C8EFEB00092165 /* CheckedView.swift */,
+				E599369427C8EF0F00092165 /* nonveganlist.txt */,
 				E584055427B0968C0043F68B /* TextPreviewView.swift */,
 				E584055627B096C20043F68B /* TextRecognition.swift */,
 				E584055827B097130043F68B /* APItest.swift */,
+				E599369827C8EF7A00092165 /* Ingredients.xcdatamodeld */,
 			);
 			path = VeggieCheck;
 			sourceTree = "<group>";
@@ -376,6 +388,7 @@
 			files = (
 				28C95E71279F2B3600D90FBE /* Preview Assets.xcassets in Resources */,
 				28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */,
+				E599369527C8EF0F00092165 /* nonveganlist.txt in Resources */,
 				28C0092227C7B43200664C67 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E599369A27C8EF7A00092165 /* Ingredients.xcdatamodeld in Sources */,
 				28C0094E27C7C85100664C67 /* SessionUserDetails.swift in Sources */,
 				28C0093027C7BC8E00664C67 /* InputPasswordView.swift in Sources */,
 				28C0093827C7C12700664C67 /* CloseModifier.swift in Sources */,
@@ -411,6 +425,8 @@
 				28C0093227C7BDA700664C67 /* ButtonView.swift in Sources */,
 				28C0095427C7CFE900664C67 /* LoginCredentials.swift in Sources */,
 				28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */,
+				E599369727C8EF3D00092165 /* PersistenceController.swift in Sources */,
+				E599369C27C8EFEB00092165 /* CheckedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +641,19 @@
 			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		E599369827C8EF7A00092165 /* Ingredients.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E599369927C8EF7A00092165 /* Ingredients.xcdatamodel */,
+			);
+			currentVersion = E599369927C8EF7A00092165 /* Ingredients.xcdatamodel */;
+			path = Ingredients.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 28C95E5E279F2B2B00D90FBE /* Project object */;
 }
