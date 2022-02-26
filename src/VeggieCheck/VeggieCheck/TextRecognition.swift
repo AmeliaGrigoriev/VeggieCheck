@@ -13,6 +13,7 @@ struct TextRecognition {
     @ObservedObject var recognizedContent: RecognizedContent
     var didFinishRecognition: () -> Void
     
+    @ObservedObject var networkChecker = NetworkChecker()
     
     func recognizeText() {
         let queue = DispatchQueue(label: "textRecognitionQueue", qos: .userInitiated)
@@ -29,25 +30,32 @@ struct TextRecognition {
                     DispatchQueue.main.async {
                         recognizedContent.items.append(textItem)
                         print(createString(ingredients: textItem.text))
-                        API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
-                            if Checker.isVeganSafe {
-                                print("vegan safe")
-//                                showingAlert = true
+                        
+                        if (networkChecker.isConnected) {
+                            API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
+                                if Checker.isVeganSafe {
+                                    print("vegan safe")
+    //                                showingAlert = true
+                                    textItem.vegan = true
+                                }
+                            }
+                        }
+                        else {
+                            let help = createList(ingredients: textItem.text)
+                            var check = false
+    //                        let Array = Food().addIngredients()
+                            for ingredient in help {
+                                if !(PersistenceController.shared.fetchIngredient(with: ingredient)) {
+                                    check = true
+                                    break
+                                }
+                            }
+                            if (check) {
+                                print("NOT VEGAN")
+                                textItem.vegan = false
+                            } else {
                                 textItem.vegan = true
                             }
-                        }
-                        
-                        let help = createList(ingredients: textItem.text)
-                        var check = false
-//                        let Array = Food().addIngredients()
-                        for ingredient in help {
-                            if !(PersistenceController.shared.fetchIngredient(with: ingredient)) {
-                                check = true
-                                break
-                            }
-                        }
-                        if (check) {
-                            print("NOT VEGAN")
                         }
                     }
                 } catch {

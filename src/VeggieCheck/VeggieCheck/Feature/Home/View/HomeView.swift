@@ -17,7 +17,9 @@ struct HomeView: View {
     @State private var showAlert = false
     @State private var showScanner = false
     @State private var isRecognizing = false
+    
     @ObservedObject var recognizedContent = RecognizedContent()
+    @ObservedObject var networkChecker = NetworkChecker()
     
     var body: some View {
         
@@ -64,18 +66,31 @@ struct HomeView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                         TextField("Enter Ingredient", text: $ingredient, onCommit: {
-                            API().getResults(ingredients: ingredient) { Checker in
-                                if Checker.isVeganSafe {
+                            if (networkChecker.isConnected) {
+                                API().getResults(ingredients: ingredient) { Checker in
+                                    if Checker.isVeganSafe {
+                                        veganAlert = .vegan
+                                        print("vegan safe")
+                                    }
+                                    else {
+                                        veganAlert = .nonvegan
+                                        print("not vagan safe")
+                                    }
+                                    showAlert = true
+                                }
+                            }
+                            else {
+                                if (PersistenceController.shared.fetchIngredient(with: ingredient)) {
                                     veganAlert = .vegan
-                                    print("vegan safe")
+                                    print("vegan safe - no wifi")
                                 }
                                 else {
                                     veganAlert = .nonvegan
-                                    print("not vagan safe")
+                                    print("not vagan safe - no wifi")
                                 }
                                 showAlert = true
                             }
-                            print(PersistenceController.shared.fetchIngredient(with: ingredient))
+                            
                         }
                                   
                         )
@@ -112,12 +127,12 @@ struct HomeView: View {
                     Text("Scan Ingredients")
                         .font(.title)
                         .fontWeight(.semibold)
-                        .padding()
+//                        .padding()
                         .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
 //                        .tint(.green)
                         .cornerRadius(8)
                         .foregroundColor(.white)
-                        .padding(10)
+//                        .padding(10)
 
                 }
             }
