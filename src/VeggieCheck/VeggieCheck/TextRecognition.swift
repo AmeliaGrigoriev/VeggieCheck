@@ -36,6 +36,19 @@ struct TextRecognition {
                                 textItem.vegan = true
                             }
                         }
+                        
+                        let help = createList(ingredients: textItem.text)
+                        var check = false
+//                        let Array = Food().addIngredients()
+                        for ingredient in help {
+                            if !(PersistenceController.shared.fetchIngredient(with: ingredient)) {
+                                check = true
+                                break
+                            }
+                        }
+                        if (check) {
+                            print("NOT VEGAN")
+                        }
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -96,5 +109,27 @@ struct TextRecognition {
             APIstring.remove(at: APIstring.index(before: APIstring.endIndex))
         }
         return APIstring
+    }
+    
+    func createList(ingredients: String) -> [String] {
+        let lowerIngredients = ingredients.lowercased()
+        
+        let halfway = lowerIngredients.replacingOccurrences(of: "[(:;]", with: ",", options: .regularExpression)
+
+        let another = halfway.replacingOccurrences(of: "from", with: "")
+        let string1 = another.replacingOccurrences(of: "contains", with: "")
+        var plz = string1.filter("abcdefghijklmnopqrstuvwxyz, ".contains)
+        
+        let lastchar = plz.last!
+        
+        if (lastchar == "." || lastchar == ",") {
+            plz.remove(at: plz.index(before: plz.endIndex))
+        }
+        
+        let tempIngredientList = plz.components(separatedBy: ",")
+        
+        let ingredientList = tempIngredientList.map { $0.trimmingCharacters(in: .whitespaces) }
+        
+        return ingredientList
     }
 }

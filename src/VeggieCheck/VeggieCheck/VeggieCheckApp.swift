@@ -103,7 +103,7 @@ struct VeggieCheckApp: App {
         preLoadData()
     }
     
-//    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.scenePhase) var scenePhase
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var sessionService = SessionServiceImpl()
@@ -115,26 +115,26 @@ struct VeggieCheckApp: App {
                     case .loggedIn:
                         HomeView()
                             .environmentObject(sessionService)
-//                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                            .environment(\.managedObjectContext, persistenceController.container.viewContext)
                     case .loggedOut:
                         LoginView()
                     }
                 
             }
         }
-//        .onChange(of: scenePhase) { (newScenePhase) in
-//            switch newScenePhase {
-//
-//            case .background:
-//                print("Scene is in background")
-//                persistenceController.save()
-//            case .inactive:
-//                print("Scene is inactive")
-//            case .active:
-//                print("Scene is active")
-//            @unknown default:
-//                print("Something is different")
-//            }
-//        }
+        .onChange(of: scenePhase) { (newScenePhase) in
+            switch newScenePhase {
+
+            case .background:
+                print("Scene is in background")
+                persistenceController.save()
+            case .inactive:
+                print("Scene is inactive")
+            case .active:
+                print("Scene is active")
+            @unknown default:
+                print("Something is different")
+            }
+        }
     }
 }
