@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject private var vm = ForgotPasswordViewModelImpl(service: ForgotPasswordServiceImpl())
     
     var body: some View {
         
@@ -16,10 +18,11 @@ struct ForgotPasswordView: View {
             
             VStack(spacing: 16) {
                 
-                InputTextFieldView(text: .constant(""), placeholder: "Email", keyboardType: .emailAddress, sfSymbol: "envelope")
+                InputTextFieldView(text: $vm.email, placeholder: "Email", keyboardType: .emailAddress, sfSymbol: "envelope")
                 
                 ButtonView(title: "Send Password Reset") {
-                    // TODO: password reset
+                    vm.sendPasswordReset()
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
             .padding(.horizontal, 15)
