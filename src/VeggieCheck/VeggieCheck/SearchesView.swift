@@ -13,11 +13,13 @@ struct SearchesView: View {
     @State var email: String
 //    @State private var email: String = "hello@gmail.com"
 //    var prevsearches: [UserSearches] = []
-    var prevsearches: [UserSearches] = PersistenceController.shared.fetchSearches(with: "Test05@test.com") ?? []
+//    var prevsearches: [UserSearches] = PersistenceController.shared.fetchSearches(with: "Test05@test.com") ?? []
 //    init(email: String) {
 //        self.prevsearches = PersistenceController.shared.fetchSearches(with: email) ?? []
 //    }
-//
+    var prevsearches: [UserSearches] {
+        return PersistenceController.shared.fetchSearches(with: email) ?? []
+    }
     
     var body: some View {
 //        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
