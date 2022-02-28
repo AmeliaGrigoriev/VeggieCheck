@@ -27,7 +27,7 @@ struct HomeView: View {
             HStack(spacing: 16) {
                 
                 VStack(spacing: 10) {
-                    Text("\(sessionService.userDetails?.firstName ?? "N/A") \(sessionService.userDetails?.lastName ?? "N/A")").font(.system(size: 22))
+                    Text("\(sessionService.userDetails?.firstName ?? "N/A") \(sessionService.userDetails?.email ?? "N/A") \(sessionService.userDetails?.lastName ?? "N/A")").font(.system(size: 22))
                 }
                             
 //                ButtonView(title: "Logout") {
@@ -68,24 +68,33 @@ struct HomeView: View {
                         TextField("Enter Ingredient", text: $ingredient, onCommit: {
                             if (networkChecker.isConnected) {
                                 API().getResults(ingredients: ingredient) { Checker in
+//                                    let search = UserSearches(context: managedObjectContext)
+//                                    search.email = "\(sessionService.userDetails?.email ?? "N/A")"
+//                                    search.ingredients = ingredient
                                     if Checker.isVeganSafe {
                                         veganAlert = .vegan
                                         print("vegan safe")
+//                                        search.vegan = true
                                     }
                                     else {
                                         veganAlert = .nonvegan
                                         print("not vagan safe")
+//                                        search.vegan = false
                                     }
                                     showAlert = true
+//                                    PersistenceController.shared.save()
+//                                    print(PersistenceController.shared.fetchSearches(with: "\(sessionService.userDetails?.email ?? "N/A")") ?? "no searches yet")
                                 }
                             }
                             else {
                                 if (PersistenceController.shared.fetchIngredient(with: ingredient)) {
                                     veganAlert = .vegan
+//                                    search.vegan = true
                                     print("vegan safe - no wifi")
                                 }
                                 else {
                                     veganAlert = .nonvegan
+//                                    search.vegan = false
                                     print("not vagan safe - no wifi")
                                 }
                                 showAlert = true
@@ -147,11 +156,27 @@ struct HomeView: View {
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
-                    Text(String(recognizedContent.items.last?.text.prefix(50) ?? "No recent searches"))
-                    NavigationLink {
-                        CheckedView(recognizedContent: recognizedContent)
+//                    Text(String(recognizedContent.items.last?.text.prefix(50) ?? "No recent searches"))
+                        .onAppear {
+                            print("working")
+                        }
+                    NavigationLink { //, email: "\(sessionService.userDetails?.email ?? "N/A")"
+                        CheckedView(recognizedContent: recognizedContent, email: "\(sessionService.userDetails?.email ?? "N/A")")
+                            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+//                            .environmentObject(sessionService)
                     } label: {
-                        Text("View Recent Searches")
+                        Text(String(recognizedContent.items.last?.text.prefix(50) ?? "No recent searches"))
+//                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
+//                            .padding(.top)
+                    }
+                    NavigationLink {
+//                        CheckedView(recognizedContent: recognizedContent)
+                        SearchesView(email: "\(sessionService.userDetails?.email ?? "N/A")")
+                            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+                    } label: {
+                        Text("View Previous Searches")
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
@@ -190,6 +215,11 @@ struct HomeView: View {
                             isRecognizing = false
                         }
                         .recognizeText()
+//                        print("working")
+//                        let search = UserSearches(context: managedObjectContext)
+//                        search.email = "\(sessionService.userDetails?.email ?? "N/A")"
+//                        search.ingredients = String(recognizedContent.items.last?.text ?? "No recent searches")
+                        
                         
                     case .failure(let error):
                         print(error.localizedDescription)

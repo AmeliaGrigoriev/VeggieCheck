@@ -95,12 +95,12 @@ struct ContentView: View {
                     case .success(let scannedImages):
                         isRecognizing = true
                         
-                        TextRecognition(scannedImages: scannedImages,
-                                        recognizedContent: recognizedContent) {
-                            // Text recognition is finished, hide the progress indicator.
-                            isRecognizing = false
-                        }
-                        .recognizeText()
+//                        TextRecognition(scannedImages: scannedImages,
+//                                        recognizedContent: recognizedContent, email: \(sessionService.userDetails?.email ?? "N/A")) {
+//                            // Text recognition is finished, hide the progress indicator.
+//                            isRecognizing = false
+//                        }
+//                        .recognizeText()
                         
                     case .failure(let error):
                         print(error.localizedDescription)

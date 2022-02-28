@@ -11,10 +11,17 @@ import Vision
 struct TextRecognition {
     var scannedImages: [UIImage]
     @ObservedObject var recognizedContent: RecognizedContent
-    var didFinishRecognition: () -> Void
+//    var email: String
     
+    var didFinishRecognition: () -> Void
+//    @EnvironmentObject var sessionService: SessionServiceImpl
+    
+    @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var networkChecker = NetworkChecker()
     
+//    @FetchRequest(entity: UserSearches.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \UserSearches.email, ascending: true)])
+//        var searches: FetchedResults<UserSearches>
+//
     func recognizeText() {
         let queue = DispatchQueue(label: "textRecognitionQueue", qos: .userInitiated)
         queue.async {
@@ -27,18 +34,22 @@ struct TextRecognition {
                     let textItem = TextItem()
                     try requestHandler.perform([getTextRecognitionRequest(with: textItem)])
                     
+//                    let search = UserSearches(context: managedObjectContext)
+//                    search.email = email
+//                    search.ingredients = textItem.text
+                    
                     DispatchQueue.main.async {
                         recognizedContent.items.append(textItem)
                         print(createString(ingredients: textItem.text))
-                        
+//                        print(email)
                         if (networkChecker.isConnected) {
                             API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
                                 if Checker.isVeganSafe {
                                     print("vegan safe")
     //                                showingAlert = true
                                     textItem.vegan = true
-                                }
-                            }
+//                                    search.vegan = true
+                                }                             }
                         }
                         else {
                             let help = createList(ingredients: textItem.text)
@@ -53,16 +64,23 @@ struct TextRecognition {
                             if (check) {
                                 print("NOT VEGAN")
                                 textItem.vegan = false
+//                                search.vegan = false
                             } else {
                                 textItem.vegan = true
+//                                search.vegan = true
                             }
                         }
                     }
+                    
+//                    PersistenceController.shared.save()
+//                    
+//                    print(PersistenceController.shared.fetchSearches(with: email) ?? [])
                 } catch {
                     print(error.localizedDescription)
                 }
                 
                 DispatchQueue.main.async {
+                    
                     didFinishRecognition()
                 }
             }

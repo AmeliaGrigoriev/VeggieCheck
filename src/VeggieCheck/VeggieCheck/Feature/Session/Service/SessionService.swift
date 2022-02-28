@@ -63,12 +63,13 @@ private extension SessionServiceImpl {
                 
                 guard let self = self,
                       let value = snapshot.value as? NSDictionary,
+                      let email = value[RegistrationKeys.email.rawValue] as? String,
                       let firstName = value[RegistrationKeys.firstName.rawValue] as? String,
                       let lastName = value[RegistrationKeys.lastName.rawValue] as? String else {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.userDetails = SessionUserDetails(firstName: firstName, lastName: lastName)
+                    self.userDetails = SessionUserDetails(firstName: firstName, lastName: lastName, email: email)
                 }
             }
     }
