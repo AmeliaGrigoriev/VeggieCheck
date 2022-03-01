@@ -19,7 +19,7 @@ struct ShowIngredientsView: View {
 //
 //        }
         VStack() {
-            Text("List of Non Vegan Ingredients")
+            Text("Non Vegan Ingredients")
                 .font(.title)
                 .fontWeight(.semibold)
             List {

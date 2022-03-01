@@ -23,11 +23,17 @@ struct SearchesView: View {
     
     var body: some View {
 //        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        List {
-            ForEach(prevsearches, id:\.self) { i in
-                VStack() {
-                    Text("\(String(i.vegan) )")
-                    Text(i.ingredients ?? "could not find")
+        VStack() {
+            Text("Scan History")
+                .font(.title)
+                .fontWeight(.semibold)
+            List {
+                ForEach(prevsearches, id:\.self) { i in
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("\(String(i.vegan) )")
+                            .fontWeight(.semibold)
+                        Text(i.ingredients ?? "could not find")
+                    }
                 }
             }
         }

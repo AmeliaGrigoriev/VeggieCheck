@@ -15,8 +15,10 @@ struct CheckedView: View {
 //    @EnvironmentObject var sessionService: SessionServiceImpl
     
     var body: some View {
-        VStack() {
-            Text("recent searches")
+        VStack(alignment: .leading) {
+            Text("Most Recent Scan")
+                .font(.largeTitle)
+                .fontWeight(.bold)
                 .onAppear {
                     print("working")
                     let search = UserSearches(context: managedObjectContext)
@@ -25,15 +27,21 @@ struct CheckedView: View {
                     search.vegan = recognizedContent.items.last?.vegan ?? false
         
                     PersistenceController.shared.save()
-                    print(PersistenceController.shared.fetchSearches(with: email) ?? "no searches yet")
+                    print(PersistenceController.shared.fetchSearches(with: email) ?? "no scans yet")
                 }
-            List(recognizedContent.items, id: \.id) { textItem in
-                VStack {
-                    Text(String(textItem.vegan))
-                    Text(String(textItem.text))
-                }
-                
-            }
+//            List(recognizedContent.items, id: \.id) { textItem in
+//                VStack {
+//                    Text(String(textItem.vegan))
+//                    Text(String(textItem.text))
+//                }
+//
+//            }
+//            Spacer()
+            Text(String(recognizedContent.items.last?.vegan ?? false))
+                .font(.title2)
+                .fontWeight(.semibold)
+            Text(String(recognizedContent.items.last?.text ?? "help"))
+            Spacer()
         }
     }
 }
