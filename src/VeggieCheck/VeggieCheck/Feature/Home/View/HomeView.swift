@@ -108,7 +108,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
+            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -124,7 +124,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
+            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -137,7 +137,7 @@ struct HomeView: View {
                         .font(.title)
                         .fontWeight(.semibold)
 //                        .padding()
-                        .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
+                        .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
 //                        .tint(.green)
                         .cornerRadius(8)
                         .foregroundColor(.white)
@@ -146,7 +146,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
+            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -185,7 +185,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 4.0/255, green: 214.0/255, blue: 116.0/255, alpha: 1.0)))
+            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             

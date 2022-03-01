@@ -34,6 +34,7 @@
 		28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E6D279F2B3600D90FBE /* Assets.xcassets */; };
 		28C95E71279F2B3600D90FBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E70279F2B3600D90FBE /* Preview Assets.xcassets */; };
 		E51224CD27CCF3F7000C82D9 /* SearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51224CC27CCF3F7000C82D9 /* SearchesView.swift */; };
+		E51224E227CE48CA000C82D9 /* VeggieCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51224E127CE48CA000C82D9 /* VeggieCheckTests.swift */; };
 		E565554427CAF10A00BE9ADD /* CheckNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E565554327CAF10A00BE9ADD /* CheckNetwork.swift */; };
 		E584055127B096070043F68B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055027B096070043F68B /* Model.swift */; };
 		E584055327B0964D0043F68B /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055227B0964D0043F68B /* ScannerView.swift */; };
@@ -46,6 +47,16 @@
 		E599369C27C8EFEB00092165 /* CheckedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599369B27C8EFEB00092165 /* CheckedView.swift */; };
 		E599369E27C9855E00092165 /* ShowIngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599369D27C9855E00092165 /* ShowIngredientsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E51224E327CE48CA000C82D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28C95E5E279F2B2B00D90FBE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28C95E65279F2B2B00D90FBE;
+			remoteInfo = VeggieCheck;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		28C0092127C7B43200664C67 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -75,6 +86,8 @@
 		28C95E70279F2B3600D90FBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28C95E72279F2B3600D90FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E51224CC27CCF3F7000C82D9 /* SearchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchesView.swift; sourceTree = "<group>"; };
+		E51224DF27CE48CA000C82D9 /* VeggieCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeggieCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51224E127CE48CA000C82D9 /* VeggieCheckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeggieCheckTests.swift; sourceTree = "<group>"; };
 		E565554327CAF10A00BE9ADD /* CheckNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetwork.swift; sourceTree = "<group>"; };
 		E584055027B096070043F68B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E584055227B0964D0043F68B /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
@@ -95,6 +108,13 @@
 			files = (
 				28C0092027C7B2D700664C67 /* FirebaseDatabase in Frameworks */,
 				28C0091E27C7B2D700664C67 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E51224DC27CE48CA000C82D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				28C95E68279F2B2B00D90FBE /* VeggieCheck */,
+				E51224E027CE48CA000C82D9 /* VeggieCheckTests */,
 				28C95E67279F2B2B00D90FBE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -314,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				28C95E66279F2B2B00D90FBE /* VeggieCheck.app */,
+				E51224DF27CE48CA000C82D9 /* VeggieCheckTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -353,6 +375,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		E51224E027CE48CA000C82D9 /* VeggieCheckTests */ = {
+			isa = PBXGroup;
+			children = (
+				E51224E127CE48CA000C82D9 /* VeggieCheckTests.swift */,
+			);
+			path = VeggieCheckTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -377,17 +407,39 @@
 			productReference = 28C95E66279F2B2B00D90FBE /* VeggieCheck.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E51224DE27CE48CA000C82D9 /* VeggieCheckTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E51224E527CE48CA000C82D9 /* Build configuration list for PBXNativeTarget "VeggieCheckTests" */;
+			buildPhases = (
+				E51224DB27CE48CA000C82D9 /* Sources */,
+				E51224DC27CE48CA000C82D9 /* Frameworks */,
+				E51224DD27CE48CA000C82D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E51224E427CE48CA000C82D9 /* PBXTargetDependency */,
+			);
+			name = VeggieCheckTests;
+			productName = VeggieCheckTests;
+			productReference = E51224DF27CE48CA000C82D9 /* VeggieCheckTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		28C95E5E279F2B2B00D90FBE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					28C95E65279F2B2B00D90FBE = {
 						CreatedOnToolsVersion = 12.5.1;
+					};
+					E51224DE27CE48CA000C82D9 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 28C95E65279F2B2B00D90FBE;
 					};
 				};
 			};
@@ -408,6 +460,7 @@
 			projectRoot = "";
 			targets = (
 				28C95E65279F2B2B00D90FBE /* VeggieCheck */,
+				E51224DE27CE48CA000C82D9 /* VeggieCheckTests */,
 			);
 		};
 /* End PBXProject section */
@@ -421,6 +474,13 @@
 				28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */,
 				E599369527C8EF0F00092165 /* nonveganlist.txt in Resources */,
 				28C0092227C7B43200664C67 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E51224DD27CE48CA000C82D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,7 +526,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E51224DB27CE48CA000C82D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E51224E227CE48CA000C82D9 /* VeggieCheckTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E51224E427CE48CA000C82D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28C95E65279F2B2B00D90FBE /* VeggieCheck */;
+			targetProxy = E51224E327CE48CA000C82D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		28C95E73279F2B3600D90FBE /* Debug */ = {
@@ -631,6 +707,44 @@
 			};
 			name = Release;
 		};
+		E51224E627CE48CA000C82D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dcu.VeggieCheckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeggieCheck.app/VeggieCheck";
+			};
+			name = Debug;
+		};
+		E51224E727CE48CA000C82D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.dcu.VeggieCheckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VeggieCheck.app/VeggieCheck";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -648,6 +762,15 @@
 			buildConfigurations = (
 				28C95E76279F2B3600D90FBE /* Debug */,
 				28C95E77279F2B3600D90FBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E51224E527CE48CA000C82D9 /* Build configuration list for PBXNativeTarget "VeggieCheckTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E51224E627CE48CA000C82D9 /* Debug */,
+				E51224E727CE48CA000C82D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
