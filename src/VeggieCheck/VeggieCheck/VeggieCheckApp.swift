@@ -20,43 +20,44 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct VeggieCheckApp: App {
     
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.shared // for Core Data
 //
-    func addIngredients() -> [String] {
+    func addIngredients() -> [String] { // take the ingredients from nonveganlist.txt and turn into array
 
-        var myStrings: [String] = []
+        var ingredientArray: [String] = []
 
-        if let path = Bundle.main.path(forResource: "nonveganlist", ofType: "txt") {
+        if let path = Bundle.main.path(forResource: "nonveganlist", ofType: "txt") { // open the txt file
             do {
-                let data = try String(contentsOfFile: path, encoding: .utf8)
+                let data = try String(contentsOfFile: path, encoding: .utf8) // turn it into a string
                 let lowerIngredients = data.lowercased()
-                myStrings = lowerIngredients.components(separatedBy: .newlines)
+                ingredientArray = lowerIngredients.components(separatedBy: .newlines) // split by newlines
 
             } catch {
                 print(error)
             }
         }
-        return myStrings
+        return ingredientArray // return the array
     }
 
-    private func preLoadData() {
+    // followed tutorial at https://www.youtube.com/watch?v=hrwx_teqwdQ
+    private func preLoadData() { // preload the ingredients into the database
         let preloadedDataKey = "didPreloadData"
         let userDefaults = UserDefaults.standard
 
-        if userDefaults.bool(forKey: preloadedDataKey) == false {
+        if userDefaults.bool(forKey: preloadedDataKey) == false { // check that data hasnt already been loaded
 
             let backgroundContext = persistenceController.container.newBackgroundContext()
             persistenceController.container.viewContext.automaticallyMergesChangesFromParent = true
 
-            backgroundContext.perform {
-                if let arrayContents = addIngredients() as? [String] {
+            backgroundContext.perform { // in the background
+                if let arrayContents = addIngredients() as? [String] { // use the list of ingredients
                     do {
-                        for item in arrayContents {
+                        for item in arrayContents { // go through array and add to db
                             let veganObject = Vegan(context: backgroundContext)
                             veganObject.ingredient = item
                         }
-                        try backgroundContext.save()
-                        userDefaults.set(true, forKey: preloadedDataKey)
+                        try backgroundContext.save() // save the ingredients to the database
+                        userDefaults.set(true, forKey: preloadedDataKey) // ingredients have been loaded
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -78,11 +79,11 @@ struct VeggieCheckApp: App {
         WindowGroup {
             NavigationView {
                 switch sessionService.state {
-                    case .loggedIn:
+                    case .loggedIn: // if the user is logged in show the home view
                         HomeView()
                             .environmentObject(sessionService)
                             .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    case .loggedOut:
+                    case .loggedOut: // else show the log in page
                         LoginView()
                     }
                 

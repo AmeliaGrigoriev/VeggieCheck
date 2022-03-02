@@ -24,11 +24,6 @@ class VeggieCheckTests: XCTestCase {
         let call = API()
         let expectation = self.expectation(description: "API Call complete")
         call.getResults(ingredients: ingredient) { Checker in
-//            print(Checker.isVeganSafe)
-//            XCTAssertFalse(Checker.isVeganSafe)
-//            XCTAssert(Checker.isVeganSafe)
-//            XCTAssertNotNil(Checker)
-//            XCTAssertEqual(Checker.nonvegan, ["chicken"])
             search = Checker
             expectation.fulfill()
         }

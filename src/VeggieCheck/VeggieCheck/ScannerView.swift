@@ -3,14 +3,14 @@
 //  VeggieCheck
 //
 //  Created by Róisín O’Rourke on 25/01/2022.
-//
+//  followed tutorial at https://www.appcoda.com/swiftui-text-recognition/
 
 import SwiftUI
 import VisionKit
 
 struct ScannerView: UIViewControllerRepresentable {
-    var didFinishScanning: ((_ result: Result<[UIImage], Error>) -> Void)
-    var didCancelScanning: () -> Void
+    var didFinishScanning: ((_ result: Result<[UIImage], Error>) -> Void) // finished scanning result will be the images or an error
+    var didCancelScanning: () -> Void // if user cancels scan dont return anything
     
     func makeUIViewController(context: Context) -> VNDocumentCameraViewController {
         let scannerViewController = VNDocumentCameraViewController()
@@ -34,7 +34,7 @@ struct ScannerView: UIViewControllerRepresentable {
         }
         
 
-        
+        // if the user successfully takes the picture
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             var scannedPages = [UIImage]()
             
@@ -45,13 +45,14 @@ struct ScannerView: UIViewControllerRepresentable {
             scannerView.didFinishScanning(.success(scannedPages))
         }
         
-        
-        func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-            scannerView.didCancelScanning()
-        }
-        
+        // if the scanner failed for some reason
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
             scannerView.didFinishScanning(.failure(error))
+        }
+        
+        // if the user exits the scanner without taking a picture
+        func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+            scannerView.didCancelScanning()
         }
     }
     

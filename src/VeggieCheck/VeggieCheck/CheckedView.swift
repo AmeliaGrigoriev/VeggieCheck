@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CheckedView: View {
+struct CheckedView: View { // view to see the most recent scanned item
     
     @ObservedObject var recognizedContent: RecognizedContent
     @State var email: String
@@ -20,20 +20,27 @@ struct CheckedView: View {
                 .fontWeight(.bold)
                 .onAppear {
                     print("working")
-                    if recognizedContent.items.count != 0 {
+                    if recognizedContent.items.count != 0 { // if there is a search to save
                         let search = UserSearches(context: managedObjectContext)
-                        search.email = email
+                        search.email = email // the current user's email address
                         search.ingredients = String(recognizedContent.items.last?.text ?? "help")
                         search.vegan = recognizedContent.items.last?.vegan ?? false
             
-                        PersistenceController.shared.save()
+                        PersistenceController.shared.save() // save to the database
+                        let findcount = PersistenceController.shared.fetchSearches(with: email) // fetch the searches
+                        let count = findcount?.count // find how many items are in the db
+                        print(count!)
+                        if count! > 20 { // if over 20, delete the oldest searcj
+                            PersistenceController.shared.deleteFirst(with: email)
+                        }
+                        
                         print(PersistenceController.shared.fetchSearches(with: email) ?? "no scans yet")
                     }
                 }
 
-            if recognizedContent.items.count != 0 {
-                if recognizedContent.items.last?.vegan ?? false {
-                    Text("Product Scanned is Vegan Friendly")
+            if recognizedContent.items.count != 0 { // if there is a search to display
+                if recognizedContent.items.last?.vegan ?? false { // if item is vegan friendly
+                    Text("Product Scanned is Vegan Friendly") // inform user
                         .font(.title)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.green)
@@ -45,7 +52,7 @@ struct CheckedView: View {
                         .foregroundColor(Color.red)
                 }
                 Spacer()
-                Text("Ingredients: ")
+                Text("Ingredients: ") // prepare to list the ingredients scanned
                     .font(.title2)
                     .fontWeight(.semibold)
             }

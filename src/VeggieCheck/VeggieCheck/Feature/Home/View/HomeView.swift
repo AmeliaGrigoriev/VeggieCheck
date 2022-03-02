@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var sessionService: SessionServiceImpl
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    // declare variables for the view
     @State private var ingredient: String = ""
     @State private var veganAlert: VeganAlert = .vegan
     @State private var showAlert = false
@@ -23,11 +24,11 @@ struct HomeView: View {
     
     var body: some View {
         
-        VStack {
+        VStack { // create a verticle stack for all the elements of the home page
 
             Spacer()
             
-            Group {
+            Group { // first group is individual ingredient search entry
                 VStack {
                     Text("Search individual ingredients")
                         .font(.title2)
@@ -38,25 +39,28 @@ struct HomeView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                         TextField("Enter Ingredient", text: $ingredient, onCommit: {
-                            if (networkChecker.isConnected) {
+                            if (networkChecker.isConnected) { // check if user has internet
+                                // if yes, pass the ingredient to the API
+                                ingredient = ingredient.replacingOccurrences(of: " ", with: "%20") // change to use in URL
                                 API().getResults(ingredients: ingredient) { Checker in
-                                    if Checker.isVeganSafe {
-                                        veganAlert = .vegan
+                                    if Checker.isVeganSafe { // if API returns vegan safe
+                                        veganAlert = .vegan // set alert to show vegan friendly
                                         print("vegan safe")
                                     }
                                     else {
                                         veganAlert = .nonvegan
                                         print("not vagan safe")
                                     }
-                                    showAlert = true
+                                    showAlert = true // show the is vegan notification
                                 }
                             }
-                            else {
+                            else { // if not connected to the internet
+                                // check if the ingredient is in the database
                                 if (PersistenceController.shared.fetchIngredient(with: ingredient)) {
                                     veganAlert = .vegan
                                     print("vegan safe - no wifi")
                                 }
-                                else {
+                                else { // if the ingredient is not found
                                     veganAlert = .nonvegan
                                     print("not vagan safe - no wifi")
                                 }
@@ -75,12 +79,12 @@ struct HomeView: View {
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
-            Group {
+            Group { // box to show the list of non vegan ingredients
                 NavigationLink {
-                    ShowIngredientsView()
+                    ShowIngredientsView() // go to the view with the list
                         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                 } label: {
-                    Text("List of Non Vegan Ingredients")
+                    Text("List of Non Vegan Ingredients") // label for the link
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
@@ -91,10 +95,10 @@ struct HomeView: View {
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
-            Group {
+            Group { // box for button for scanning ingredients
                 Button(action: {
-                    guard !isRecognizing else { return }
-                    showScanner = true
+                    guard !isRecognizing else { return } // if it isnt running text recognition on something else
+                    showScanner = true // open the camera
                 }) {
                     Text("Scan Ingredients")
                         .font(.title2)
@@ -109,7 +113,7 @@ struct HomeView: View {
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
-            Group {
+            Group { // box for the search history
                 VStack {
                     Text("Search History")
                         .font(.title2)
@@ -117,7 +121,7 @@ struct HomeView: View {
                         .foregroundColor(Color.white)
                         .padding(.bottom, 5)
                         
-                    NavigationLink {
+                    NavigationLink { // view the most recent search
                         CheckedView(recognizedContent: recognizedContent, email: "\(sessionService.userDetails?.email ?? "N/A")")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
@@ -130,7 +134,7 @@ struct HomeView: View {
                         }
                         
                     }
-                    NavigationLink {
+                    NavigationLink { // view the list of previous searches
                         SearchesView(email: "\(sessionService.userDetails?.email ?? "N/A")")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
@@ -147,13 +151,13 @@ struct HomeView: View {
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
-            if isRecognizing {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color(UIColor.systemIndigo)))
+            if isRecognizing { // if text recognition is running
+                ProgressView() // show the loading symbol
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.green))
                     .padding(.bottom, 20)
             }
         }
-        .alert(isPresented: $showAlert) {
+        .alert(isPresented: $showAlert) { // pop up notification for the individual vegan check
             switch veganAlert {
             case .vegan:
                 return Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is vegan friendly"), dismissButton: .default(Text("Got it!")))
@@ -162,7 +166,7 @@ struct HomeView: View {
             }
         }
         .navigationTitle("VeggieCheck")
-        .navigationBarItems(trailing: Button(action: {
+        .navigationBarItems(trailing: Button(action: { // log out button in the top right corner
             sessionService.logout()
         }, label: {
             HStack {
@@ -174,28 +178,28 @@ struct HomeView: View {
             .background(Color.green)
             .cornerRadius(18)
         }))
-
-        .sheet(isPresented: $showScanner, content: {
+        
+        // followed tutorial at https://www.appcoda.com/swiftui-text-recognition/
+        .sheet(isPresented: $showScanner, content: { // open the camera
             ScannerView { result in
                 switch result {
-                    case .success(let scannedImages):
-                        isRecognizing = true
+                    case .success(let scannedImages): // if the image capture was succesful
+                        isRecognizing = true // show the loading symbol
                         
-                        TextRecognition(scannedImages: scannedImages,
+                        TextRecognition(scannedImages: scannedImages, // pass the images taken to the tr class
                                         recognizedContent: recognizedContent) {
                             // Text recognition is finished, hide the progress indicator.
                             isRecognizing = false
                         }
-                        .recognizeText()
+                        .recognizeText() // run text recognition
 
                     case .failure(let error):
                         print(error.localizedDescription)
                 }
                 
-                showScanner = false
+                showScanner = false // hide the scanner view
                 
-            } didCancelScanning: {
-                // Dismiss the scanner controller and the sheet.
+            } didCancelScanning: { // if user left scanner without taking a picture
                 showScanner = false
             }
         })
