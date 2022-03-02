@@ -11,18 +11,12 @@ struct SearchesView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var email: String
-//    @State private var email: String = "hello@gmail.com"
-//    var prevsearches: [UserSearches] = []
-//    var prevsearches: [UserSearches] = PersistenceController.shared.fetchSearches(with: "Test05@test.com") ?? []
-//    init(email: String) {
-//        self.prevsearches = PersistenceController.shared.fetchSearches(with: email) ?? []
-//    }
+
     var prevsearches: [UserSearches] {
         return PersistenceController.shared.fetchSearches(with: email) ?? []
     }
     
     var body: some View {
-//        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
         VStack() {
             Text("Scan History")
                 .font(.title)
@@ -30,8 +24,17 @@ struct SearchesView: View {
             List {
                 ForEach(prevsearches, id:\.self) { i in
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("\(String(i.vegan) )")
-                            .fontWeight(.semibold)
+                        if i.vegan {
+                            Text("Vegan Friendly")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.green)
+                        }
+                        else {
+                            Text("Not Vegan Friendly")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.red)
+                        }
+                        
                         Text(i.ingredients ?? "could not find")
                     }
                 }

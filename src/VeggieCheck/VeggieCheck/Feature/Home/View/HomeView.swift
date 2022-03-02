@@ -24,34 +24,6 @@ struct HomeView: View {
     var body: some View {
         
         VStack {
-            HStack(spacing: 16) {
-                
-                VStack(spacing: 10) {
-                    Text("\(sessionService.userDetails?.firstName ?? "N/A") \(sessionService.userDetails?.email ?? "N/A") \(sessionService.userDetails?.lastName ?? "N/A")").font(.system(size: 22))
-                }
-                            
-//                ButtonView(title: "Logout") {
-//                    sessionService.logout()
-//                }
-            }
-            .padding(.horizontal, 16)
-            .navigationTitle("VeggieCheck")
-            .navigationBarItems(trailing: Button(action: {
-                sessionService.logout()
-            }, label: {
-                HStack {
-//                    Image(systemName: "doc.text.viewfinder")
-//                        .renderingMode(.template)
-//                        .foregroundColor(.white)
-
-                    Text("Log out")
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal, 16)
-                .frame(height: 36)
-                .background(Color.green)
-                .cornerRadius(18)
-            }))
 
             Spacer()
             
@@ -68,33 +40,24 @@ struct HomeView: View {
                         TextField("Enter Ingredient", text: $ingredient, onCommit: {
                             if (networkChecker.isConnected) {
                                 API().getResults(ingredients: ingredient) { Checker in
-//                                    let search = UserSearches(context: managedObjectContext)
-//                                    search.email = "\(sessionService.userDetails?.email ?? "N/A")"
-//                                    search.ingredients = ingredient
                                     if Checker.isVeganSafe {
                                         veganAlert = .vegan
                                         print("vegan safe")
-//                                        search.vegan = true
                                     }
                                     else {
                                         veganAlert = .nonvegan
                                         print("not vagan safe")
-//                                        search.vegan = false
                                     }
                                     showAlert = true
-//                                    PersistenceController.shared.save()
-//                                    print(PersistenceController.shared.fetchSearches(with: "\(sessionService.userDetails?.email ?? "N/A")") ?? "no searches yet")
                                 }
                             }
                             else {
                                 if (PersistenceController.shared.fetchIngredient(with: ingredient)) {
                                     veganAlert = .vegan
-//                                    search.vegan = true
                                     print("vegan safe - no wifi")
                                 }
                                 else {
                                     veganAlert = .nonvegan
-//                                    search.vegan = false
                                     print("not vagan safe - no wifi")
                                 }
                                 showAlert = true
@@ -117,7 +80,7 @@ struct HomeView: View {
                     ShowIngredientsView()
                         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                 } label: {
-                    Text("list of non vegan ingredients")
+                    Text("List of Non Vegan Ingredients")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
@@ -134,15 +97,11 @@ struct HomeView: View {
                     showScanner = true
                 }) {
                     Text("Scan Ingredients")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.semibold)
-//                        .padding()
                         .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
-//                        .tint(.green)
                         .cornerRadius(8)
                         .foregroundColor(.white)
-//                        .padding(10)
-
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -152,35 +111,34 @@ struct HomeView: View {
             
             Group {
                 VStack {
-                    Text("Most Recent Search")
+                    Text("Search History")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundColor(Color.white)
-//                    Text(String(recognizedContent.items.last?.text.prefix(50) ?? "No recent searches"))
-                        .onAppear {
-                            print("working")
-                        }
-                    NavigationLink { //, email: "\(sessionService.userDetails?.email ?? "N/A")"
+                        .padding(.bottom, 5)
+                        
+                    NavigationLink {
                         CheckedView(recognizedContent: recognizedContent, email: "\(sessionService.userDetails?.email ?? "N/A")")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-//                            .environmentObject(sessionService)
                     } label: {
-                        Text(String(recognizedContent.items.last?.text.prefix(50) ?? "No recent searches"))
-//                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
-//                            .padding(.top)
+                        HStack {
+                            Text(String(recognizedContent.items.last?.text.prefix(20) ?? "No recent searches"))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
+                                .padding(.bottom, 5)
+                            Image(systemName: "chevron.right")
+                        }
+                        
                     }
                     NavigationLink {
-//                        CheckedView(recognizedContent: recognizedContent)
                         SearchesView(email: "\(sessionService.userDetails?.email ?? "N/A")")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
                         Text("View Previous Searches")
-                            .font(.title2)
+//                            .font(.title3)
                             .fontWeight(.semibold)
                             .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
-                            .padding(.top)
+//                            .padding(.top)
                     }
                 }
             }
@@ -203,6 +161,20 @@ struct HomeView: View {
                 return Alert(title: Text("Vegan Check"), message: Text("Ingredient entered is not vegan friendly"), dismissButton: .default(Text("Got it!")))
             }
         }
+        .navigationTitle("VeggieCheck")
+        .navigationBarItems(trailing: Button(action: {
+            sessionService.logout()
+        }, label: {
+            HStack {
+                Text("Log out")
+                    .foregroundColor(.white)
+            }
+            .padding(.horizontal, 16)
+            .frame(height: 36)
+            .background(Color.green)
+            .cornerRadius(18)
+        }))
+
         .sheet(isPresented: $showScanner, content: {
             ScannerView { result in
                 switch result {
@@ -215,12 +187,7 @@ struct HomeView: View {
                             isRecognizing = false
                         }
                         .recognizeText()
-//                        print("working")
-//                        let search = UserSearches(context: managedObjectContext)
-//                        search.email = "\(sessionService.userDetails?.email ?? "N/A")"
-//                        search.ingredients = String(recognizedContent.items.last?.text ?? "No recent searches")
-                        
-                        
+
                     case .failure(let error):
                         print(error.localizedDescription)
                 }

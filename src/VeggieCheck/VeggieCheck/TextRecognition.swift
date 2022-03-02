@@ -11,17 +11,12 @@ import Vision
 struct TextRecognition {
     var scannedImages: [UIImage]
     @ObservedObject var recognizedContent: RecognizedContent
-//    var email: String
     
     var didFinishRecognition: () -> Void
-//    @EnvironmentObject var sessionService: SessionServiceImpl
     
     @Environment(\.managedObjectContext) var managedObjectContext
     @ObservedObject var networkChecker = NetworkChecker()
-    
-//    @FetchRequest(entity: UserSearches.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \UserSearches.email, ascending: true)])
-//        var searches: FetchedResults<UserSearches>
-//
+
     func recognizeText() {
         let queue = DispatchQueue(label: "textRecognitionQueue", qos: .userInitiated)
         queue.async {
@@ -34,27 +29,21 @@ struct TextRecognition {
                     let textItem = TextItem()
                     try requestHandler.perform([getTextRecognitionRequest(with: textItem)])
                     
-//                    let search = UserSearches(context: managedObjectContext)
-//                    search.email = email
-//                    search.ingredients = textItem.text
-                    
                     DispatchQueue.main.async {
                         recognizedContent.items.append(textItem)
                         print(createString(ingredients: textItem.text))
-//                        print(email)
+
                         if (networkChecker.isConnected) {
                             API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
                                 if Checker.isVeganSafe {
                                     print("vegan safe")
-    //                                showingAlert = true
                                     textItem.vegan = true
-//                                    search.vegan = true
-                                }                             }
+                                }
+                            }
                         }
                         else {
                             let help = createList(ingredients: textItem.text)
                             var check = false
-    //                        let Array = Food().addIngredients()
                             for ingredient in help {
                                 if !(PersistenceController.shared.fetchIngredient(with: ingredient)) {
                                     check = true
@@ -64,17 +53,12 @@ struct TextRecognition {
                             if (check) {
                                 print("NOT VEGAN")
                                 textItem.vegan = false
-//                                search.vegan = false
                             } else {
                                 textItem.vegan = true
-//                                search.vegan = true
                             }
                         }
                     }
-                    
-//                    PersistenceController.shared.save()
-//                    
-//                    print(PersistenceController.shared.fetchSearches(with: email) ?? [])
+
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -100,7 +84,7 @@ struct TextRecognition {
             observations.forEach { observation in
                 guard let recognizedText = observation.topCandidates(1).first else { return }
                 textItem.text += recognizedText.string
-//                textItem.text += "\n"
+                textItem.text += " "
             }
         }
         
@@ -111,24 +95,17 @@ struct TextRecognition {
     }
     
     func createString(ingredients: String) -> String {
-//        var ingredients = textItem.text
-        let lowerIngredients = ingredients.lowercased()
-//        var wordToRemove = "contains"
+        let bannedWords = ["may contain", "traces of", "from", "contains"]
         
-        let halfway = lowerIngredients.replacingOccurrences(of: "[(:;]", with: ",", options: .regularExpression)
-//        if let range = halfway.range(of: wordToRemove) {
-//           halfway.removeSubrange(range)
-//        }
-        let another = halfway.replacingOccurrences(of: "from", with: "")
-        let string1 = another.replacingOccurrences(of: "contains", with: "")
-//        let onemore = string1.replacingOccurrences(of: " ", with: "%20")
-//        let string2 = string1.replacingOccurrences(of: ", ", with: ",")
-//        let string3 = string2.replacingOccurrences(of: " ,", with: ",")
-        let plz = string1.filter("abcdefghijklmnopqrstuvwxyz, ".contains)
-        var APIstring = plz.replacingOccurrences(of: " ", with: "%20")
-//        var APIstring = onemore.replacingOccurrences(of: " ", with: "%20")
-        // only works without spaces !!!!!! need to change
+        var lowerIngredients = ingredients.lowercased()
         
+        lowerIngredients = lowerIngredients.replacingOccurrences(of: "[(:;.]", with: ",", options: .regularExpression)
+        for word in bannedWords {
+            lowerIngredients = lowerIngredients.replacingOccurrences(of: word, with: "")
+        }
+        lowerIngredients = lowerIngredients.filter("abcdefghijklmnopqrstuvwxyz, ".contains)
+        var APIstring = lowerIngredients.replacingOccurrences(of: " ", with: "%20")
+
         let lastchar = APIstring.last!
         
         if (lastchar == "." || lastchar == ",") {
@@ -138,21 +115,24 @@ struct TextRecognition {
     }
     
     func createList(ingredients: String) -> [String] {
-        let lowerIngredients = ingredients.lowercased()
+        let bannedWords = ["may contain", "traces of", "from", "contains"]
         
-        let halfway = lowerIngredients.replacingOccurrences(of: "[(:;]", with: ",", options: .regularExpression)
+        var lowerIngredients = ingredients.lowercased()
+        
+        lowerIngredients = lowerIngredients.replacingOccurrences(of: "[(:;.]", with: ",", options: .regularExpression)
+        for word in bannedWords {
+            lowerIngredients = lowerIngredients.replacingOccurrences(of: word, with: "")
+        }
+        lowerIngredients = lowerIngredients.filter("abcdefghijklmnopqrstuvwxyz, ".contains)
+        var stringToArray = lowerIngredients.replacingOccurrences(of: " ", with: "%20")
 
-        let another = halfway.replacingOccurrences(of: "from", with: "")
-        let string1 = another.replacingOccurrences(of: "contains", with: "")
-        var plz = string1.filter("abcdefghijklmnopqrstuvwxyz, ".contains)
-        
-        let lastchar = plz.last!
+        let lastchar = stringToArray.last!
         
         if (lastchar == "." || lastchar == ",") {
-            plz.remove(at: plz.index(before: plz.endIndex))
+            stringToArray.remove(at: stringToArray.index(before: stringToArray.endIndex))
         }
         
-        let tempIngredientList = plz.components(separatedBy: ",")
+        let tempIngredientList = stringToArray.components(separatedBy: ",")
         
         let ingredientList = tempIngredientList.map { $0.trimmingCharacters(in: .whitespaces) }
         

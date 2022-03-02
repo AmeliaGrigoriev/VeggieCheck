@@ -33,8 +33,7 @@ struct ScannerView: UIViewControllerRepresentable {
             self.scannerView = scannerView
         }
         
-        
-        // MARK: - VNDocumentCameraViewControllerDelegate
+
         
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             var scannedPages = [UIImage]()

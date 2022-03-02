@@ -63,18 +63,15 @@ struct PersistenceController {
 
         let fetchRequest: NSFetchRequest<UserSearches>
         fetchRequest = UserSearches.fetchRequest()
-//        var isVegan: Bool = true
 
         fetchRequest.predicate = NSPredicate(format: "email LIKE[cd] %@", email)
 
         do {
             return try container.viewContext.fetch(fetchRequest)
-//                isVegan = false
             
         } catch {
             print("error")
             return nil
         }
-//        return isVegan
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import VeggieCheck
 
 class VeggieCheckTests: XCTestCase {
 
@@ -17,92 +18,49 @@ class VeggieCheckTests: XCTestCase {
 //        // Put teardown code here. This method is called after the invocation of each test method in the class.
 //    }
 
-    func testAPI() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        struct Checker: Codable {
-            var isVeganSafe: Bool
-//            var nonvegan: [String]
-        }
-
-        class API {
-            func getResults(ingredients: String, completion: @escaping (Checker) -> ()) {
-                let fullURL = "https://is-vegan.netlify.com/.netlify/functions/api?ingredients=" + ingredients
-                guard let url = URL(string: fullURL) else {
-                    print("ingredients not entered correctly"); return
-                }
-                
-                URLSession.shared.dataTask(with: url) { (data, _, _) in
-                    let results = try! JSONDecoder().decode(Checker.self, from: data!)
-                    completion(results)
-                }.resume()
-            }
-        }
-        
-        API().getResults(ingredients: "chicken") { Checker in
-            print(Checker.isVeganSafe)
-//            XCTAssertEqual(Checker.isVeganSafe, false)
-            XCTAssertTrue(Checker.isVeganSafe)
+    func testanotherAPI() {
+        let ingredient = "sugar"
+        var search: Checker?
+        let call = API()
+        let expectation = self.expectation(description: "API Call complete")
+        call.getResults(ingredients: ingredient) { Checker in
+//            print(Checker.isVeganSafe)
+//            XCTAssertFalse(Checker.isVeganSafe)
+//            XCTAssert(Checker.isVeganSafe)
+//            XCTAssertNotNil(Checker)
 //            XCTAssertEqual(Checker.nonvegan, ["chicken"])
+            search = Checker
+            expectation.fulfill()
         }
-        
+        waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertNotNil(search)
+        XCTAssert(search!.isVeganSafe)
     }
     
-    func testAPIAgainstNonVeganList() throws {
-
-        struct Checker: Codable {
-            var isVeganSafe: Bool
-//            var nonvegan: [String]
+    func testAgainstDB() {
+        let ingredient = "sugar"
+        var search: Checker?
+        let call = API()
+        let expectation = self.expectation(description: "API Call complete")
+        call.getResults(ingredients: ingredient) { Checker in
+            search = Checker
+            expectation.fulfill()
         }
-
-        class API {
-            func getResults(ingredients: String, completion: @escaping (Checker) -> ()) {
-                let fullURL = "https://is-vegan.netlify.com/.netlify/functions/api?ingredients=" + ingredients
-                guard let url = URL(string: fullURL) else {
-                    print("ingredients not entered correctly"); return
-                }
-                
-                URLSession.shared.dataTask(with: url) { (data, _, _) in
-                    let results = try! JSONDecoder().decode(Checker.self, from: data!)
-                    completion(results)
-                }.resume()
-            }
-            
-            func addIngredients() -> [String] {
-                
-                var myStrings: [String] = []
-
-                if let path = Bundle.main.path(forResource: "nonveganlist", ofType: "txt") {
-                    do {
-                        let data = try String(contentsOfFile: path, encoding: .utf8)
-                        let lowerIngredients = data.lowercased()
-                        myStrings = lowerIngredients.components(separatedBy: .newlines)
-                    } catch {
-                        print(error)
-                    }
-                }
-                return myStrings
-            }
-            
-            func checkInDB(ingredient: String) -> Bool {
-                var isVegan: Bool = true
-                let dbIngredients: [String] = addIngredients()
-                
-                if (dbIngredients.contains(ingredient)) {
-                    isVegan = false
-                }
-                
-                return isVegan
+        waitForExpectations(timeout: 10, handler: nil)
+        let foods: [String] = VeggieCheckApp().addIngredients()
+        var isVegan = true
+//        if foods.contains(ingredient) {
+//            isVegan = false
+//        }
+        for food in foods {
+            if food == ingredient {
+                isVegan = false
+                break
             }
         }
         
-        API().getResults(ingredients: "tallow") { Checker in
-            XCTAssertEqual(Checker.isVeganSafe, API().checkInDB(ingredient: "tallow"))
-//            XCTAssertEqual(Checker.nonvegan, ["albumen"])
-        }
+        XCTAssert(search!.isVeganSafe)
+        XCTAssert(isVegan)
     }
 
 //    func testPerformanceExample() throws {
@@ -113,3 +71,4 @@ class VeggieCheckTests: XCTestCase {
 //    }
 
 }
+

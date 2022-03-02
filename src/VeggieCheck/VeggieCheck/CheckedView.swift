@@ -12,7 +12,6 @@ struct CheckedView: View {
     @ObservedObject var recognizedContent: RecognizedContent
     @State var email: String
     @Environment(\.managedObjectContext) var managedObjectContext
-//    @EnvironmentObject var sessionService: SessionServiceImpl
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,26 +20,37 @@ struct CheckedView: View {
                 .fontWeight(.bold)
                 .onAppear {
                     print("working")
-                    let search = UserSearches(context: managedObjectContext)
-                    search.email = email
-                    search.ingredients = String(recognizedContent.items.last?.text ?? "help")
-                    search.vegan = recognizedContent.items.last?.vegan ?? false
-        
-                    PersistenceController.shared.save()
-                    print(PersistenceController.shared.fetchSearches(with: email) ?? "no scans yet")
+                    if recognizedContent.items.count != 0 {
+                        let search = UserSearches(context: managedObjectContext)
+                        search.email = email
+                        search.ingredients = String(recognizedContent.items.last?.text ?? "help")
+                        search.vegan = recognizedContent.items.last?.vegan ?? false
+            
+                        PersistenceController.shared.save()
+                        print(PersistenceController.shared.fetchSearches(with: email) ?? "no scans yet")
+                    }
                 }
-//            List(recognizedContent.items, id: \.id) { textItem in
-//                VStack {
-//                    Text(String(textItem.vegan))
-//                    Text(String(textItem.text))
-//                }
-//
-//            }
+
+            if recognizedContent.items.count != 0 {
+                if recognizedContent.items.last?.vegan ?? false {
+                    Text("Product Scanned is Vegan Friendly")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.green)
+                }
+                else {
+                    Text("Product Scanned is not Vegan Friendly")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.red)
+                }
+                Spacer()
+                Text("Ingredients: ")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+            }
 //            Spacer()
-            Text(String(recognizedContent.items.last?.vegan ?? false))
-                .font(.title2)
-                .fontWeight(.semibold)
-            Text(String(recognizedContent.items.last?.text ?? "help"))
+            Text(String(recognizedContent.items.last?.text ?? "no scans to show yet"))
             Spacer()
         }
     }
@@ -49,6 +59,5 @@ struct CheckedView: View {
 struct CheckedView_Previews: PreviewProvider {
     static var previews: some View {
         CheckedView(recognizedContent: RecognizedContent(), email: "")
-//            .environmentObject(SessionServiceImpl())
     }
 }

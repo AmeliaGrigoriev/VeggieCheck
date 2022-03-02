@@ -15,9 +15,6 @@ struct ShowIngredientsView: View {
     var ingredients: FetchedResults<Vegan>
     
     var body: some View {
-//        ScrollView {
-//
-//        }
         VStack() {
             Text("Non Vegan Ingredients")
                 .font(.title)
