@@ -75,7 +75,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
+            .background(Color.green)
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -91,7 +91,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
+            .background(Color.green)
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -103,13 +103,13 @@ struct HomeView: View {
                     Text("Scan Ingredients")
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
+                        .background(Color.green)
                         .cornerRadius(8)
                         .foregroundColor(.white)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
+            .background(Color.green)
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
@@ -147,7 +147,7 @@ struct HomeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(UIColor(red: 114.0/255, green: 235.0/255, blue: 99.0/255, alpha: 1.0)))
+            .background(Color.green)
             .cornerRadius(10)
             .padding([.bottom, .trailing, .leading])
             
