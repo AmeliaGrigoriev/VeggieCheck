@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PreviewLayourComponentModifier: ViewModifier {
+struct PreviewLayoutComponentModifier: ViewModifier {
     
     let name: String
     
@@ -23,6 +23,6 @@ struct PreviewLayourComponentModifier: ViewModifier {
 extension View {
     
     func preview(with name: String) -> some View {
-        self.modifier(PreviewLayourComponentModifier(name: name))
+        self.modifier(PreviewLayoutComponentModifier(name: name))
     }
 }
