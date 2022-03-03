@@ -19,7 +19,7 @@ struct CloseModifier: ViewModifier {
                     presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Image(systemName: "xmark.circle")
-//                        .foregroundColor(.green)
+                        .foregroundColor(.green)
                         .font(.system(size: 20))
                 })
             }
