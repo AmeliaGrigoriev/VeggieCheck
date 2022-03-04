@@ -4,6 +4,7 @@
 //
 //  Created by Amelia Grigoriev on 20/02/2022.
 //
+// followed tutorial at: https://www.youtube.com/watch?v=5gIuYHn9nOc for firebase authentication
 
 import SwiftUI
 

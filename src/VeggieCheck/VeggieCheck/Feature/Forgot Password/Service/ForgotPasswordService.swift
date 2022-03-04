@@ -4,6 +4,7 @@
 //
 //  Created by Amelia Grigoriev on 23/02/2022.
 //
+// followed tutorial at: https://www.youtube.com/watch?v=5gIuYHn9nOc for firebase authentication
 
 import Combine
 import Foundation
