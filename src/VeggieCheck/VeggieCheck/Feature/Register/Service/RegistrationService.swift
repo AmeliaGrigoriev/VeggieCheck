@@ -14,7 +14,7 @@ import FirebaseDatabase
 enum RegistrationKeys: String {
     case firstName
     case lastName
-    case email // CHANGE
+    case email
 }
 
 protocol RegistrationService {
@@ -38,7 +38,7 @@ final class RegistrationServiceImpl: RegistrationService {
                             if let uid = res?.user.uid {
                                 
                                 let values = [RegistrationKeys.firstName.rawValue: details.firstName,
-                                              RegistrationKeys.lastName.rawValue: details.lastName, RegistrationKeys.email.rawValue: details.email] as [String : Any] // CHANGE
+                                              RegistrationKeys.lastName.rawValue: details.lastName, RegistrationKeys.email.rawValue: details.email] as [String : Any]
                                 
                                 Database.database()
                                     .reference()

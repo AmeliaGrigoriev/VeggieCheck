@@ -6,6 +6,8 @@
 //
 // followed tutorial at: https://www.youtube.com/watch?v=5gIuYHn9nOc for firebase authentication
 
+// views for primary and secondary buttons
+
 import SwiftUI
 
 struct ButtonView: View {

@@ -6,6 +6,8 @@
 //
 // followed tutorial at: https://www.youtube.com/watch?v=5gIuYHn9nOc for firebase authentication
 
+// views for the password text fields
+
 import SwiftUI
 
 struct InputPasswordView: View {
@@ -17,7 +19,7 @@ struct InputPasswordView: View {
     private let textFieldLeading: CGFloat = 30
     
     var body: some View {
-        
+//        secure field so that password is not visbale
         SecureField(placeholder, text: $password)
             .frame(maxWidth: .infinity, minHeight: 44)
             .padding(.leading, sfSymbol == nil ? textFieldLeading / 2 : textFieldLeading)

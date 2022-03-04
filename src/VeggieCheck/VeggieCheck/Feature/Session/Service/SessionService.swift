@@ -17,8 +17,8 @@ enum SessionState {
 }
 
 protocol SessionService {
-    var state: SessionState { get }
-    var userDetails: SessionUserDetails? { get }
+    var state: SessionState { get } // logged in or logged out
+    var userDetails: SessionUserDetails? { get } // details of user
     func logout()
 }
 
@@ -34,7 +34,7 @@ final class SessionServiceImpl: ObservableObject, SessionService {
     }
     
     func logout() {
-        try? Auth.auth().signOut()
+        try? Auth.auth().signOut() // FirebaseAuth signOut function
     }
 }
 
@@ -53,6 +53,7 @@ private extension SessionServiceImpl {
             }
     }
     
+    // allows you to stay logged in after refreshing the app
     func handleRefresh(with uid: String) {
         
         Database

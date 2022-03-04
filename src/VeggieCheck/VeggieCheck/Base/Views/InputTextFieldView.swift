@@ -6,6 +6,8 @@
 //
 // followed tutorial at: https://www.youtube.com/watch?v=5gIuYHn9nOc for firebase authentication
 
+// views for the text fields such as email, password and names
+
 import SwiftUI
 
 struct InputTextFieldView: View {
