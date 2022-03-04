@@ -10,7 +10,7 @@ import Vision
 
 struct TextRecognition {
     var scannedImages: [UIImage]
-    @ObservedObject var recognizedContent: RecognizedContent
+    @ObservedObject var searches: Searches
     
     var didFinishRecognition: () -> Void
     
@@ -26,24 +26,24 @@ struct TextRecognition {
                 let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
                 
                 do {
-                    let textItem = TextItem()
-                    try requestHandler.perform([getTextRecognitionRequest(with: textItem)])
+                    let searchItem = SearchItem()
+                    try requestHandler.perform([getTextRecognitionRequest(with: searchItem)])
                     
                     DispatchQueue.main.async {
-                        recognizedContent.items.append(textItem)
-                        print(createString(ingredients: textItem.text))
+                        searches.items.append(searchItem)
+                        print(createString(ingredients: searchItem.text))
 
                         if (networkChecker.isConnected) { // check if the user is connected to the internet
                             // create a string for the URL and pass to the API function
-                            API().getResults(ingredients: createString(ingredients: textItem.text)) { Checker in
+                            API().getResults(ingredients: createString(ingredients: searchItem.text)) { Checker in
                                 if Checker.isVeganSafe {
                                     print("vegan safe")
-                                    textItem.vegan = true
+                                    searchItem.vegan = true
                                 }
                             }
                         }
                         else {
-                            let ingredientList = createList(ingredients: textItem.text) // turn the text captured into a list
+                            let ingredientList = createList(ingredients: searchItem.text) // turn the text captured into a list
                             var check = false
                             for ingredient in ingredientList { // go through the list
                                 if !(PersistenceController.shared.fetchIngredient(with: ingredient)) {
@@ -53,9 +53,9 @@ struct TextRecognition {
                             }
                             if (check) {
                                 print("NOT VEGAN")
-                                textItem.vegan = false // if ingredient was found -> non vegan
+                                searchItem.vegan = false // if ingredient was found -> non vegan
                             } else {
-                                textItem.vegan = true
+                                searchItem.vegan = true
                             }
                         }
                     }
@@ -72,7 +72,7 @@ struct TextRecognition {
         }
     }
     
-    private func getTextRecognitionRequest(with textItem: TextItem) -> VNRecognizeTextRequest {
+    private func getTextRecognitionRequest(with searchItem: SearchItem) -> VNRecognizeTextRequest {
         let request = VNRecognizeTextRequest { request, error in
             if let error = error {
                 print(error.localizedDescription)
@@ -85,8 +85,8 @@ struct TextRecognition {
             observations.forEach { observation in // each line is an observation
                 guard let recognizedText = observation.topCandidates(1).first else { return }
                 // top candidates 1 -> the most accurate version of the text
-                textItem.text += recognizedText.string // add to the string of ingredients
-                textItem.text += " " // add a space to represent the new line break
+                searchItem.text += recognizedText.string // add to the string of ingredients
+                searchItem.text += " " // add a space to represent the new line break
             }
         }
         

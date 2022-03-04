@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CheckedView: View { // view to see the most recent scanned item
     
-    @ObservedObject var recognizedContent: RecognizedContent
+    @ObservedObject var searches: Searches
     @State var email: String
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -20,11 +20,11 @@ struct CheckedView: View { // view to see the most recent scanned item
                 .fontWeight(.bold)
                 .onAppear {
                     print("working")
-                    if recognizedContent.items.count != 0 { // if there is a search to save
+                    if searches.items.count != 0 { // if there is a search to save
                         let search = UserSearches(context: managedObjectContext)
                         search.email = email // the current user's email address
-                        search.ingredients = String(recognizedContent.items.last?.text ?? "help")
-                        search.vegan = recognizedContent.items.last?.vegan ?? false
+                        search.ingredients = String(searches.items.last?.text ?? "help")
+                        search.vegan = searches.items.last?.vegan ?? false
             
                         PersistenceController.shared.save() // save to the database
                         let findcount = PersistenceController.shared.fetchSearches(with: email) // fetch the searches
@@ -38,8 +38,8 @@ struct CheckedView: View { // view to see the most recent scanned item
                     }
                 }
 
-            if recognizedContent.items.count != 0 { // if there is a search to display
-                if recognizedContent.items.last?.vegan ?? false { // if item is vegan friendly
+            if searches.items.count != 0 { // if there is a search to display
+                if searches.items.last?.vegan ?? false { // if item is vegan friendly
                     Text("Product Scanned is Vegan Friendly") // inform user
                         .font(.title)
                         .fontWeight(.semibold)
@@ -57,7 +57,7 @@ struct CheckedView: View { // view to see the most recent scanned item
                     .fontWeight(.semibold)
             }
 //            Spacer()
-            Text(String(recognizedContent.items.last?.text ?? "no scans to show yet"))
+            Text(String(searches.items.last?.text ?? "no scans to show yet"))
             Spacer()
         }
     }
@@ -65,6 +65,6 @@ struct CheckedView: View { // view to see the most recent scanned item
 
 struct CheckedView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckedView(recognizedContent: RecognizedContent(), email: "")
+        CheckedView(searches: Searches(), email: "")
     }
 }

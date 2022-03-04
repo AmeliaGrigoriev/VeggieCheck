@@ -24,7 +24,7 @@ struct HomeView: View {
     @State private var showScanner = false
     @State private var isRecognizing = false
     
-    @ObservedObject var recognizedContent = RecognizedContent()
+    @ObservedObject var searches = Searches()
     @ObservedObject var networkChecker = NetworkChecker()
     
     var body: some View {
@@ -127,11 +127,11 @@ struct HomeView: View {
                         .padding(.bottom, 5)
                         
                     NavigationLink { // view the most recent search
-                        CheckedView(recognizedContent: recognizedContent, email: "\(sessionService.userDetails?.email ?? "N/A")")
+                        CheckedView(searches: searches, email: "\(sessionService.userDetails?.email ?? "N/A")")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
                         HStack {
-                            Text(String(recognizedContent.items.last?.text.prefix(20) ?? "No recent searches"))
+                            Text(String(searches.items.last?.text.prefix(20) ?? "No recent searches"))
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color(UIColor(red: 0.0/255, green: 21.0/255, blue: 156.0/255, alpha: 1.0)))
                                 .padding(.bottom, 5)
@@ -192,7 +192,7 @@ struct HomeView: View {
                         isRecognizing = true // show the loading symbol
                         
                         TextRecognition(scannedImages: scannedImages, // pass the images taken to the tr class
-                                        recognizedContent: recognizedContent) {
+                                        searches: searches) {
                             // Text recognition is finished, hide the progress indicator.
                             isRecognizing = false
                         }

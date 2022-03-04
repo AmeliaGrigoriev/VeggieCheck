@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TextItem: Identifiable {
+class SearchItem: Identifiable {
     var id: String
     var text: String = ""
     var vegan: Bool = false
@@ -18,6 +18,6 @@ class TextItem: Identifiable {
 }
 
 
-class RecognizedContent: ObservableObject {
-    @Published var items = [TextItem]()
+class Searches: ObservableObject {
+    @Published var items = [SearchItem]()
 }
