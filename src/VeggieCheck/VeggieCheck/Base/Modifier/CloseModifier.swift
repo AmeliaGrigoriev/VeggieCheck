@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CloseModifier: ViewModifier {
     
+//    presentation mode for screen do pop up
     @Environment(\.presentationMode) var presentationMode
     
     func body(content: Content) -> some View {
@@ -17,7 +18,7 @@ struct CloseModifier: ViewModifier {
         content
             .toolbar {
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    presentationMode.wrappedValue.dismiss() // dismissing the pop up when close button is closed
                 }, label: {
                     Image(systemName: "xmark.circle")
                         .foregroundColor(.green)

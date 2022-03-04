@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode 
     @StateObject private var vm = ForgotPasswordViewModelImpl(service: ForgotPasswordServiceImpl())
     
     var body: some View {

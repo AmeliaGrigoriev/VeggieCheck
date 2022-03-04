@@ -22,12 +22,13 @@ struct LoginView: View {
             VStack(spacing: 16) {
                 
                 VStack(spacing: 16) {
-                    
+                    // enter email text field
                     InputTextFieldView(text: $vm.credentials.email,
                                        placeholder: "Email",
                                        keyboardType: .emailAddress,
                                        sfSymbol: "envelope")
                     
+                    // enter password text field
                     InputPasswordView(password: $vm.credentials.password,
                                       placeholder: "Password",
                                       sfSymbol: "lock")
@@ -35,7 +36,7 @@ struct LoginView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {
+                    Button(action: { // forgot password button
                         showForgotPassword.toggle()
                     }, label: {
                         Text("Forgot Password?")
@@ -60,19 +61,19 @@ struct LoginView: View {
                         showRegistration.toggle()
                     }
                     .sheet(isPresented: $showRegistration) {
-                            RegisterView()
+                            RegisterView() // brings user to registration screen
                     }
                 }
             }
             .padding(.horizontal, 15)
             .navigationTitle("Login")
             .alert(isPresented: $vm.hasError, content: {
-                
+                // if login fails
                 if case .failed(let error) = vm.state {
                     return Alert(
                         title: Text("Error"),
                         message: Text(error.localizedDescription))
-                } else {
+                } else { // if there is no localized description
                     return Alert(
                         title: Text("Error"),
                         message: Text("Something went wrong"))
