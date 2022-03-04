@@ -3,7 +3,7 @@
 //  VeggieCheck
 //
 //  Created by Róisín O’Rourke on 25/01/2022.
-//
+//  based on tutorial at https://www.appcoda.com/swiftui-text-recognition/
 
 import Foundation
 
