@@ -103,9 +103,7 @@ struct TextRecognition {
         var lowerIngredients = ingredients.lowercased()
         // make the punctuation consistent
         lowerIngredients = lowerIngredients.replacingOccurrences(of: "[(:;.]", with: ",", options: .regularExpression)
-//        lowerIngredients = lowerIngredients.replacingOccurrences(of: ",,,", with: ",")
         lowerIngredients = lowerIngredients.replacingOccurrences(of: ",,", with: ",")
-//        lowerIngredients = lowerIngredients.replacingOccurrences(of: ",", with: ",")
         for word in bannedWords { // remove the banned words
             lowerIngredients = lowerIngredients.replacingOccurrences(of: word, with: "")
         }

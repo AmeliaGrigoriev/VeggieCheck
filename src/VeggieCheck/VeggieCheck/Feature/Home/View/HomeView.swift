@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum VeganAlert {
+    case vegan, nonvegan
+}
+
 struct HomeView: View {
     
     @EnvironmentObject var sessionService: SessionServiceImpl

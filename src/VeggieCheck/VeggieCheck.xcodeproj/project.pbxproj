@@ -30,7 +30,6 @@
 		28C0095D27CC479D00664C67 /* ForgotPasswordService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0095C27CC479D00664C67 /* ForgotPasswordService.swift */; };
 		28C0096027CC484900664C67 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0095F27CC484900664C67 /* ForgotPasswordViewModel.swift */; };
 		28C95E6A279F2B2B00D90FBE /* VeggieCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */; };
-		28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C95E6B279F2B2B00D90FBE /* ContentView.swift */; };
 		28C95E6E279F2B3600D90FBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E6D279F2B3600D90FBE /* Assets.xcassets */; };
 		28C95E71279F2B3600D90FBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C95E70279F2B3600D90FBE /* Preview Assets.xcassets */; };
 		E51224CD27CCF3F7000C82D9 /* SearchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51224CC27CCF3F7000C82D9 /* SearchesView.swift */; };
@@ -38,7 +37,6 @@
 		E565554427CAF10A00BE9ADD /* CheckNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E565554327CAF10A00BE9ADD /* CheckNetwork.swift */; };
 		E584055127B096070043F68B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055027B096070043F68B /* Model.swift */; };
 		E584055327B0964D0043F68B /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055227B0964D0043F68B /* ScannerView.swift */; };
-		E584055527B0968C0043F68B /* TextPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055427B0968C0043F68B /* TextPreviewView.swift */; };
 		E584055727B096C20043F68B /* TextRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055627B096C20043F68B /* TextRecognition.swift */; };
 		E584055927B097130043F68B /* APItest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E584055827B097130043F68B /* APItest.swift */; };
 		E599369527C8EF0F00092165 /* nonveganlist.txt in Resources */ = {isa = PBXBuildFile; fileRef = E599369427C8EF0F00092165 /* nonveganlist.txt */; };
@@ -81,7 +79,6 @@
 		28C0095F27CC484900664C67 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		28C95E66279F2B2B00D90FBE /* VeggieCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeggieCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeggieCheckApp.swift; sourceTree = "<group>"; };
-		28C95E6B279F2B2B00D90FBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		28C95E6D279F2B3600D90FBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28C95E70279F2B3600D90FBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		28C95E72279F2B3600D90FBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -91,7 +88,6 @@
 		E565554327CAF10A00BE9ADD /* CheckNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetwork.swift; sourceTree = "<group>"; };
 		E584055027B096070043F68B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E584055227B0964D0043F68B /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
-		E584055427B0968C0043F68B /* TextPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewView.swift; sourceTree = "<group>"; };
 		E584055627B096C20043F68B /* TextRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognition.swift; sourceTree = "<group>"; };
 		E584055827B097130043F68B /* APItest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APItest.swift; sourceTree = "<group>"; };
 		E599369427C8EF0F00092165 /* nonveganlist.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nonveganlist.txt; sourceTree = "<group>"; };
@@ -347,7 +343,6 @@
 				28C0092327C7B79200664C67 /* Feature */,
 				28C0092127C7B43200664C67 /* GoogleService-Info.plist */,
 				28C95E69279F2B2B00D90FBE /* VeggieCheckApp.swift */,
-				28C95E6B279F2B2B00D90FBE /* ContentView.swift */,
 				E599369627C8EF3D00092165 /* PersistenceController.swift */,
 				28C95E6D279F2B3600D90FBE /* Assets.xcassets */,
 				28C95E72279F2B3600D90FBE /* Info.plist */,
@@ -357,7 +352,6 @@
 				E584055227B0964D0043F68B /* ScannerView.swift */,
 				E599369B27C8EFEB00092165 /* CheckedView.swift */,
 				E599369427C8EF0F00092165 /* nonveganlist.txt */,
-				E584055427B0968C0043F68B /* TextPreviewView.swift */,
 				E584055627B096C20043F68B /* TextRecognition.swift */,
 				E584055827B097130043F68B /* APItest.swift */,
 				E599369827C8EF7A00092165 /* Ingredients.xcdatamodeld */,
@@ -509,9 +503,7 @@
 				28C0095D27CC479D00664C67 /* ForgotPasswordService.swift in Sources */,
 				28C0094327C7C4D800664C67 /* RegistrationDetails.swift in Sources */,
 				28C0095727C7D01600664C67 /* LoginService.swift in Sources */,
-				E584055527B0968C0043F68B /* TextPreviewView.swift in Sources */,
 				E584055327B0964D0043F68B /* ScannerView.swift in Sources */,
-				28C95E6C279F2B2B00D90FBE /* ContentView.swift in Sources */,
 				E584055727B096C20043F68B /* TextRecognition.swift in Sources */,
 				E51224CD27CCF3F7000C82D9 /* SearchesView.swift in Sources */,
 				28C0092E27C7BBDB00664C67 /* PreviewLayoutComponentModifier.swift in Sources */,
